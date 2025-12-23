@@ -7,6 +7,7 @@
     --text-muted: #666666;
     --accent: #faaf50;
     --border: #eaeaea;
+    --text-highlight: #896b30;
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
     --font-title: 'Playfair Display', system-ui, -apple-system, sans-serif;
 }
@@ -17,6 +18,7 @@
         --text-main: #eeeeee;
         --text-muted: #a0a0a0;
         --border: #333333;
+        --text-highlight: #dfcca6;
     }
 }
 
@@ -27,6 +29,7 @@
         --text-main: #eeeeee;
         --text-muted: #a0a0a0;
         --border: #333333;
+        --text-highlight: #dfcca6;
     }
 }
 
@@ -36,6 +39,7 @@
         --text-main: #222222;
         --text-muted: #666666;
         --border: #eaeaea;
+        --text-highlight: #896b30;
     }
 }
 
@@ -134,6 +138,10 @@ h1, h2, h3 {
     font-family: var(--font-title);
     line-height: 1.2;
     margin-bottom: 0.5rem;
+}
+
+i {
+    color: var(--text-highlight);
 }
 
 /* Articles */
