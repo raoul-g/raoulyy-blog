@@ -1,0 +1,141 @@
+:root {
+    --bg-color: #ffffff;
+    --text-main: #222222;
+    --text-muted: #666666;
+    --accent: #d946ef; /* Matches the vibe of the flower emoji */
+    --border: #eaeaea;
+    --font-sans: system-ui, -apple-system, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #111111;
+        --text-main: #eeeeee;
+        --text-muted: #a0a0a0;
+        --border: #333333;
+    }
+}
+
+/* Theme Logic: Invert system preference when checked */
+@media (prefers-color-scheme: light) {
+    :root:has(#theme-toggle-checkbox:checked) {
+        --bg-color: #111111;
+        --text-main: #eeeeee;
+        --text-muted: #a0a0a0;
+        --border: #333333;
+    }
+    :root:has(#theme-toggle-checkbox:checked) .theme-toggle-label::after {
+        content: '☀️';
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:has(#theme-toggle-checkbox:checked) {
+        --bg-color: #ffffff;
+        --text-main: #222222;
+        --text-muted: #666666;
+        --border: #eaeaea;
+    }
+    :root:has(#theme-toggle-checkbox:checked) .theme-toggle-label::after {
+        content: '🌙';
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* Header & Nav */
+header {
+    margin-bottom: 3rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    padding: 0;
+    margin: 0;
+}
+
+#theme-toggle-checkbox {
+    display: none;
+}
+
+.theme-toggle-label {
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0.25rem;
+    line-height: 1;
+    user-select: none;
+}
+
+.theme-toggle-label::after {
+    content: '🌙';
+}
+
+@media (prefers-color-scheme: dark) {
+    .theme-toggle-label::after {
+        content: '☀️';
+    }
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+/* Articles */
+article {
+    margin-bottom: 2.5rem;
+}
+
+article h3 {
+    margin-bottom: 0.25rem;
+}
+
+time {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* Footer & Aside */
+aside {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+
+footer {
+    margin-top: 3rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
