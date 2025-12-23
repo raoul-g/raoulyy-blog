@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+
 :root {
     --bg-color: #ffffff;
     --text-main: #222222;
     --text-muted: #666666;
-    --accent: #faaf50; /* Matches the vibe of the flower emoji */
+    --accent: #faaf50;
     --border: #eaeaea;
-    --font-sans: system-ui, -apple-system, sans-serif;
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-title: 'Playfair Display', system-ui, -apple-system, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -127,6 +131,7 @@ a:hover {
 }
 
 h1, h2, h3 {
+    font-family: var(--font-title);
     line-height: 1.2;
     margin-bottom: 0.5rem;
 }
@@ -137,6 +142,10 @@ h1, h2, h3 {
 .book-title {
     color: var(--text-muted);
     margin-bottom: 0;
+}
+.book-title-below {
+    color: var(--text-muted);
+    margin-top: 0;
 }
 
 .review-title {
