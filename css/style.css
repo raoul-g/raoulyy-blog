@@ -2,7 +2,7 @@
     --bg-color: #ffffff;
     --text-main: #222222;
     --text-muted: #666666;
-    --accent: #d946ef; /* Matches the vibe of the flower emoji */
+    --accent: #faaf50; /* Matches the vibe of the flower emoji */
     --border: #eaeaea;
     --font-sans: system-ui, -apple-system, sans-serif;
 }
@@ -24,9 +24,6 @@
         --text-muted: #a0a0a0;
         --border: #333333;
     }
-    :root:has(#theme-toggle-checkbox:checked) .theme-toggle-label::after {
-        content: '☀️';
-    }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -36,13 +33,14 @@
         --text-muted: #666666;
         --border: #eaeaea;
     }
-    :root:has(#theme-toggle-checkbox:checked) .theme-toggle-label::after {
-        content: '🌙';
-    }
 }
 
 * {
     box-sizing: border-box;
+}
+
+html {
+    scrollbar-gutter: stable;
 }
 
 body {
@@ -72,6 +70,7 @@ nav ul {
     list-style: none;
     display: flex;
     gap: 1.5rem;
+    align-items: center;
     padding: 0;
     margin: 0;
 }
@@ -82,19 +81,38 @@ nav ul {
 
 .theme-toggle-label {
     cursor: pointer;
-    font-size: 1.5rem;
-    padding: 0.25rem;
-    line-height: 1;
-    user-select: none;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    background-color: var(--text-muted);
+    border-radius: 12px;
+    position: relative;
+    transition: background-color 0.3s ease;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cpath d='M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 6px center, right 6px center;
 }
 
 .theme-toggle-label::after {
-    content: '🌙';
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--bg-color);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
 }
 
+#theme-toggle-checkbox:checked + .theme-toggle-label::after {
+    transform: translateX(20px);
+}
+
+/* Swap icons for Dark Mode preference so the visual logic stays consistent */
 @media (prefers-color-scheme: dark) {
-    .theme-toggle-label::after {
-        content: '☀️';
+    .theme-toggle-label {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cpath d='M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/%3E%3C/svg%3E");
     }
 }
 
@@ -114,6 +132,17 @@ h1, h2, h3 {
 }
 
 /* Articles */
+
+/* Review */
+.book-title {
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+.review-title {
+    margin-block-start: 0;
+}
+
 article {
     margin-bottom: 2.5rem;
 }
@@ -124,7 +153,6 @@ article h3 {
 
 time {
     font-size: 0.875rem;
-    color: var(--text-muted);
 }
 
 /* Footer & Aside */
@@ -139,3 +167,7 @@ footer {
     color: var(--text-muted);
     font-size: 0.875rem;
 }
+
+
+/* Theme Logic: Invert system preference when checked */
+@media (prefers-color-scheme: light) {
