@@ -17,7 +17,7 @@
 <body>
     <header>
         <nav>
-            <a href="../index.html" aria-label="Home">🏵️raoulyy blog</a>
+            <a href="/" aria-label="Home">🏵️raoulyy blog</a>
             <ul>
                 <li><a href="../book-reviews.html">Reviews</a></li>
                 <!-- <li><a href="../blog.html">Blog</a></li>
@@ -43,6 +43,11 @@
         <p>&copy; <span id="current-year">2025</span> raoulyy blog. All rights reserved.</p>
     </footer>
     <script src="../js/main.js"></script>
+    <script>
+        if (window.location.protocol === 'file:') {
+            document.querySelectorAll('a[href="/"]').forEach(link => link.setAttribute('href', '../index.html'));
+        }
+    </script>
 </body>
 
 </html>
