@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 
 // --- Configuration ---
-// TODO: Change this to your actual domain
 const DOMAIN = 'https://raoulyy.blog'; 
 const ROOT_DIR = path.join(__dirname, '..');
 const OUTPUT_FILE = path.join(ROOT_DIR, 'sitemap.xml');
@@ -24,7 +23,7 @@ function findHtmlFiles(dir, fileList = []) {
             if (!IGNORE_DIRS.includes(file)) {
                 findHtmlFiles(filePath, fileList);
             }
-        } else if (path.extname(file) === '.html' && !file.startsWith('_')) {
+        } else if (path.extname(file) === '.html' && !file.startsWith('_') && file !== '404.html') {
             // Get path relative to root and convert backslashes to forward slashes
             const relativePath = path.relative(ROOT_DIR, filePath);
             const urlPath = relativePath.split(path.sep).join('/');
