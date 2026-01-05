@@ -17,7 +17,6 @@ document.getElementById('current-year').textContent = new Date().getFullYear();
 
 // 4. Share Article Logic
 const shareBtn = document.getElementById('share-btn');
-const feedback = document.getElementById('share-feedback');
 
 if (shareBtn) {
     shareBtn.addEventListener('click', async () => {
@@ -37,10 +36,6 @@ if (shareBtn) {
             // Fallback: Copy to clipboard
             try {
                 await navigator.clipboard.writeText(window.location.href);
-                if (feedback) {
-                    feedback.style.opacity = '1';
-                    setTimeout(() => { feedback.style.opacity = '0'; }, 2000);
-                }
             } catch (err) {
                 console.error('Failed to copy URL', err);
             }

@@ -57,7 +57,6 @@
         <div class="share-container">
             <a href="../marginalia.html" class="view-all">Read other marginalia &rarr;</a>
             <div class="share-actions">
-                <span id="share-feedback" class="share-feedback">Link copied!</span>
                 <button id="share-btn" class="share-btn">Share Article</button>
             </div>
         </div>
@@ -67,11 +66,6 @@
         <p>&copy; <span id="current-year">2025</span> raoulyy blog. All rights reserved.</p>
     </footer>
     <script src="../js/main.js"></script>
-    <script>
-        if (window.location.protocol === 'file:') {
-            document.querySelectorAll('a[href="/"]').forEach(link => link.setAttribute('href', '../index.html'));
-        }
-    </script>
 </body>
 
 </html>
