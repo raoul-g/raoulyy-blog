@@ -200,6 +200,12 @@ footer {
     
 }
 
+.inline-rosette {
+    height: 1.2em;
+    width: 1.2em;
+    vertical-align: -0.2em;
+}
+
 
 /* Theme Logic: Invert system preference when checked */
 @media (prefers-color-scheme: light) {
