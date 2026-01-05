@@ -42,3 +42,10 @@ if (shareBtn) {
         }
     });
 }
+
+// 5. GoatCounter Analytics
+const analyticsScript = document.createElement('script');
+analyticsScript.dataset.goatcounter = "https://raoulyy.goatcounter.com/count";
+analyticsScript.async = true;
+analyticsScript.src = "//gc.zgo.at/count.js";
+document.head.appendChild(analyticsScript);
