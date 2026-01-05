@@ -153,6 +153,24 @@ h1, h2, h3 {
     margin-top: 0;
 }
 
+.publish-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.2;
+    &::before {
+        content: '';
+        width: 3rem;
+        height: 1px;
+        background-color: var(--border);
+        margin-bottom: 0.5rem;
+    }
+}
+
 .review-title {
     margin-block-start: 0;
 }
@@ -222,11 +240,12 @@ article {
         margin-bottom: 0;
     
     }
+    time {
+        font-size: 0.875rem;
+    }   
 }
 
-time {
-    font-size: 0.875rem;
-}
+
 
 /* Footer & Aside */
 aside {
