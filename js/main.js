@@ -23,7 +23,6 @@ if (shareBtn) {
     shareBtn.addEventListener('click', async () => {
         const shareData = {
             title: document.title,
-            text: document.querySelector('meta[name="description"]')?.content || '',
             url: window.location.href
         };
 
