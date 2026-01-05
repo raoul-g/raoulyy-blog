@@ -206,6 +206,11 @@ footer {
     vertical-align: -0.2em;
 }
 
+.profile-image {
+    float: left;
+    margin-right: 1.5rem;
+}
+
 
 /* Theme Logic: Invert system preference when checked */
 @media (prefers-color-scheme: light) {
