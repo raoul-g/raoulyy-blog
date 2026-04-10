@@ -151,10 +151,6 @@ h1, h2, h3 {
     color: var(--text-muted);
     margin-bottom: 0;
 }
-.book-title-below {
-    color: var(--text-muted);
-    margin-top: 0;
-}
 
 .publish-meta {
     display: flex;
@@ -222,13 +218,6 @@ h1, h2, h3 {
 .share-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
-}
-
-.share-feedback {
-    font-size: 0.875rem;
-    color: var(--text-highlight);
-    opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
 article {

@@ -5,6 +5,7 @@
   "description": "Static blog generated with Eleventy",
   "scripts": {
     "build": "eleventy",
+    "deploy": "npm run build && node tools/generate-sitemap.js && node tools/copy-docs.js",
     "serve": "eleventy --serve",
     "watch": "eleventy --watch"
   },

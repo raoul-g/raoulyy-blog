@@ -16,6 +16,12 @@ Build the site:
 npm run build
 ```
 
+Build the site, regenerate the sitemap, and update `docs/` for GitHub Pages:
+
+```bash
+npm run deploy
+```
+
 Run a local server with live reload:
 
 ```bash
@@ -86,6 +92,28 @@ npm run serve
 
 - The old static HTML files have been moved out of the root so the site works as a clean Eleventy project.
 - Output is generated into `_site/`, which is ignored by Git.
+- The deployed GitHub Pages site is served from `docs/`, which contains the static build output copied from `_site/`.
+- `docs/.nojekyll` is present so GitHub Pages will serve the files directly and will not try to build with Jekyll.
+
+## GitHub Pages deploy workflow
+
+1. Build the site, regenerate the sitemap, and update `docs/` in one command:
+
+```bash
+npm run deploy
+```
+
+2. Commit and push the generated `docs/` output:
+
+```bash
+git add docs/.nojekyll docs
+git commit -m "Update deployed site"
+git push
+```
+
+3. Confirm your repository Pages settings are configured to publish from the `docs/` folder.
+
+4. Every time you update content or templates, repeat the build/copy/commit/push workflow.
 
 ## Sitemap
 
@@ -94,6 +122,8 @@ To re-generate the sitemap if needed:
 ```bash
 node ./tools/generate-sitemap.js
 ```
+
+The deploy command also regenerates the sitemap and copies it into `docs/`.
 
 ### Eleventy
 
