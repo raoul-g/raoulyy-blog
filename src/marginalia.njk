@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: Marginalia
+description: ": notes in the margin of a book, manuscript, or letter."
+permalink: "/marginalia.html"
+---
+<h1>marginalia</h1>
+<p class="secondary">: notes in the margin of a book, manuscript, or letter. <br /> some of the thoughts I had while reading different books:</p>
+<br>
+<section aria-labelledby="marginalia">
+{% for post in collections.marginalia %}
+<article>
+  <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+  <p class="subtitle">{{ post.data.book }}</p>
+  <time datetime="{{ post.date | htmlDate }}">{{ post.date | readableDate }}</time>
+</article>
+{% endfor %}
+<p style="margin-left: 1rem;" class="secondary">More to come...</p>
+</section>

@@ -107,6 +107,9 @@ dist
 # Docusaurus cache and generated files
 .docusaurus
 
+# Eleventy output directory
+_site
+
 # Serverless directories
 .serverless/
 

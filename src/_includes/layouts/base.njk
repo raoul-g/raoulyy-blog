@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}{% if title != site.title %} — {{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ description }}">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/images/rosette.png" type="image/png">
+
+  {% if "marginalia" in page.url %}
+    {% set ogType = "article" %}
+  {% else %}
+    {% set ogType = "website" %}
+  {% endif %}
+
+  <meta property="og:type" content="{{ ogType }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:title" content="{{ title }}{% if title != site.title %} — {{ site.title }}{% endif %}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:image" content="{{ site.image }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
+  <meta name="twitter:title" content="{{ title }}{% if title != site.title %} — {{ site.title }}{% endif %}">
+  <meta name="twitter:description" content="{{ description }}">
+  <meta name="twitter:image" content="{{ site.image }}">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="/" aria-label="Home">raoulyy<img src="/images/rosette.png" alt="rosette" class="inline-rosette">blog</a>
+      <ul>
+        <li><a href="/marginalia.html">marginalia</a></li>
+        <input type="checkbox" id="theme-toggle-checkbox" aria-label="Toggle Dark Mode">
+        <label for="theme-toggle-checkbox" class="theme-toggle-label" title="Toggle Theme"></label>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}
+      {{ content | safe }}
+    {% endblock %}
+  </main>
+
+  <footer>
+    <p>&copy; <span id="current-year">2025</span> raoulyy blog. All rights reserved.</p>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+
+</html>
