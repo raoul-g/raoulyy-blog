@@ -1,0 +1,48 @@
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+  {% set currentIndex = -1 %}
+  {% for item in collections.fragments %}
+    {% if item.url == page.url %}
+      {% set currentIndex = loop.index0 %}
+    {% endif %}
+  {% endfor %}
+
+  {% set fragmentNumber = collections.fragments | length - currentIndex %}
+
+  <div class="fragment-detail">
+    <div class="fragment-detail-header">
+      <div>
+        <h1>{{ title }}</h1>
+        <time datetime="{{ page.date | htmlDate }}">{{ page.date | readableDate }}</time>
+      </div>
+      <span class="fragment-number">#{{ fragmentNumber }}</span>
+    </div>
+
+    <div class="fragment-body">
+      {{ content | safe }}
+    </div>
+
+    <div class="fragment-navigation">
+      <div class="fragment-nav fragment-prev">
+        {% if currentIndex < collections.fragments | length - 1 %}
+          {% set before = collections.fragments[currentIndex + 1] %}
+          {% set beforeNumber = collections.fragments | length - (currentIndex + 1) %}
+          <a class="fragment-nav-link" href="{{ before.url }}" data-tooltip="{{ before.data.title }}">← fragment {{ beforeNumber }}</a>
+        {% endif %}
+      </div>
+
+      <div class="fragment-share">
+        <button id="share-btn" class="share-btn">Share Fragment</button>
+      </div>
+
+      <div class="fragment-nav fragment-next">
+        {% if currentIndex > 0 %}
+          {% set after = collections.fragments[currentIndex - 1] %}
+          {% set afterNumber = collections.fragments | length - (currentIndex - 1) %}
+          <a class="fragment-nav-link" href="{{ after.url }}" data-tooltip="{{ after.data.title }}">fragment {{ afterNumber }} →</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

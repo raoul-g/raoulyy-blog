@@ -14,6 +14,12 @@ module.exports = function(eleventyConfig) {
       .sort((a, b) => b.date - a.date);
   });
 
+  eleventyConfig.addCollection("fragments", function(collectionApi) {
+    return collectionApi
+      .getFilteredByGlob("src/fragments/*.md")
+      .sort((a, b) => b.date - a.date);
+  });
+
   eleventyConfig.addFilter("htmlDate", (dateObj) => {
     return new Date(dateObj).toISOString().split("T")[0];
   });

@@ -2,13 +2,13 @@
 layout: layouts/marginalia.njk
 title: An Absurd Passion for the Impossible in Times of Despair
 description: Towards the end of this year I finished reading 'To Have or To Be' by Erich Fromm.
-book: To Have or To Be? | Erich Fromm
+book: "To Have or To Be? | Erich Fromm"
 date: 2024-12-30
 excerpt: Fromm argues that our society must shift from a "having mode" of existence toward a "being mode" rooted in authentic connection, love, and human development.
 permalink: "/marginalia/an-absurd-passion-for-the-impossible-in-times-of-despair.html"
 ---
 
-<p class="book-title">To Have or To Be? | Erich Fromm</p>
+<p class="book-title">'To Have or To Be?' | Erich Fromm</p>
 <h1 class="review-title">An Absurd Passion for the Impossible in Times of Despair</h1>
 
 Towards the end of this year I finished reading _To Have or To Be_ by Erich Fromm. The title of the book hints at two radically different modes of existence that Fromm elucidates in the first part of the book. The "Having Mode" is a way of existing that is centered on the desire to acquire, possess, and control, leading to a life focused on things. In contrast to this is the "Being Mode", which is a way of living centered on inner activity, authentic experience, connection, love and growth, rather than on the acquisition and possession of things. Fromm shows that this distinction has been pointed out in the past by thinkers such as the Buddha, Jesus, Meister Eckhart, Spinoza, Marx and Albert Schweitzer.
@@ -35,7 +35,7 @@ Can we still _have_ hope in such a situation? Not really - but we might still _b
   <span class="publish-label">thoughts collected by</span>
   <time class="publish-time" datetime="2024-12-30">December 30, 2024</time>
 </div>
-
+<hr class="marginalia-divider" />
 <div class="share-container">
   <a href="/marginalia.html" class="view-all">Read other marginalia &rarr;</a>
   <div class="share-actions">

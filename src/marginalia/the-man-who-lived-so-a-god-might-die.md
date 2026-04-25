@@ -2,7 +2,7 @@
 layout: layouts/marginalia.njk
 title: The Man Who Lived So a God Might Die
 description: Reflections on Pär Lagerkvist's novel 'Barabbas' and its portrait of unbelief, longing, and modern separation.
-book: "'Barabbas' | Pär Lagerkvist"
+book: "Barabbas | Pär Lagerkvist"
 date: 2023-04-12
 excerpt: Lagerkvist's Barabbas is unable to believe, and his restless search becomes a mirror for modern unbelief and fractured longing.
 permalink: "/marginalia/the-man-who-lived-so-a-god-might-die.html"
@@ -37,7 +37,7 @@ Ultimately, Barabbas remains just as religiously invested in the illusion of one
   <span class="publish-label">thoughts collected by</span>
   <time class="publish-time" datetime="2023-04-12">April 12, 2023</time>
 </div>
-
+<hr class="marginalia-divider" />
 <div class="share-container">
   <a href="/marginalia.html" class="view-all">Read other marginalia &rarr;</a>
   <div class="share-actions">

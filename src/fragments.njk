@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+title: Fragments
+description: Mini-essays and compact reflections.
+permalink: "/fragments.html"
+---
+<h1>fragments</h1>
+<p class="secondary">: short mini-essays, compact observations, and small ideas about whatever crosses my mind.</p>
+<br>
+<section aria-labelledby="fragments">
+{% for post in collections.fragments %}
+<a href="{{ post.url }}" class="fragment-card-link">
+<article class="fragment-card">
+  <span class="fragment-number">#{{ collections.fragments | length - loop.index0 }}</span>
+  <h3>{{ post.data.title }}</h3>
+  <p class="subtitle">{{ post.data.description }}</p>
+  <time datetime="{{ post.date | htmlDate }}">{{ post.date | readableDate }}</time>
+</article>
+</a>
+{% endfor %}
+<p style="margin-left: 1rem;" class="secondary">More fragments added almost weekly.</p>
+</section>

@@ -2,7 +2,7 @@
 layout: layouts/marginalia.njk
 title: In Praise of Reading
 description: Reading is an end in itself, but Maryanne Wolf makes the case for why deep reading is vital for thinking and society.
-book: "'Reader Come Home: The Reading Brain in a Digital World' | Maryanne Wolf"
+book: "Reader Come Home: The Reading Brain in a Digital World | Maryanne Wolf"
 date: 2025-12-23
 excerpt: Wolf explains how deep reading supports reflection, empathy, and democratic life in a society facing the rise of hyper attention.
 permalink: "/marginalia/in-praise-of-reading.html"
@@ -37,7 +37,7 @@ This is why reading is more than a hobby or a preference, it is vital for a trul
   <span class="publish-label">thoughts collected by</span>
   <time class="publish-time" datetime="2025-12-23">December 23, 2025</time>
 </div>
-
+<hr class="marginalia-divider" />
 <div class="share-container">
   <a href="/marginalia.html" class="view-all">Read other marginalia &rarr;</a>
   <div class="share-actions">

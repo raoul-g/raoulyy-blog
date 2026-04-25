@@ -8,7 +8,7 @@ excerpt: Han describes hyperculture as a de-siting of meaning, where narratives 
 permalink: "/marginalia/the-de-siting-of-the-soul.html"
 ---
 
-<p class="book-title">Hyperculture: Culture and Globalisation | Byung-Chul Han</p>
+<p class="book-title">'Hyperculture: Culture and Globalisation' | Byung-Chul Han</p>
 <h1 class="review-title">The De-Siting of the Soul</h1>
 
 > _There is no longer the sort of fulfilling time that is due to a beautiful structure of past, present and future, that is, to a story, to narrative suspense. Time becomes naked, that is, devoid of narration. A point-like time, or event time, emerges. Because it is poor in horizons, this kind of time is not able to carry much meaning._ (Byung-Chul Han)
@@ -43,7 +43,7 @@ What seems to be core to Han's solution for our current predicament is Heidegger
   <span class="publish-label">thoughts collected by</span>
   <time class="publish-time" datetime="2026-03-29">March 29, 2026</time>
 </div>
-
+<hr class="marginalia-divider" />
 <div class="share-container">
   <a href="/marginalia.html" class="view-all">Read other marginalia &rarr;</a>
   <div class="share-actions">

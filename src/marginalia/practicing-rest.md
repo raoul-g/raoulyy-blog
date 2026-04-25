@@ -2,7 +2,7 @@
 layout: layouts/marginalia.njk
 title: Practicing Rest
 description: Reflecting on Walter Brueggemann's understanding of Sabbath as resistance to the culture of constant busyness.
-book: "'Sabbath as Resistance: Saying No to the Culture of Now' | Walter Brueggemann"
+book: "Sabbath as Resistance: Saying No to the Culture of Now | Walter Brueggemann"
 date: 2025-07-17
 excerpt: Brueggemann invites us to practice Sabbath as a form of resistance, a radical rest that counters consumer society and affirms equality.
 permalink: "/marginalia/practicing-rest.html"
@@ -33,7 +33,7 @@ I want to end the review with one final quote from the book which sums up the pr
   <span class="publish-label">thoughts collected by</span>
   <time class="publish-time" datetime="2025-07-17">July 17, 2025</time>
 </div>
-
+<hr class="marginalia-divider" />
 <div class="share-container">
   <a href="/marginalia.html" class="view-all">Read other marginalia &rarr;</a>
   <div class="share-actions">

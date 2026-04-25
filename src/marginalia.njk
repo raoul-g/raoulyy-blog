@@ -9,11 +9,14 @@ permalink: "/marginalia.html"
 <br>
 <section aria-labelledby="marginalia">
 {% for post in collections.marginalia %}
-<article>
-  <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
-  <p class="subtitle">{{ post.data.book }}</p>
+<a href="{{ post.url }}" class="marginalia-link">
+<article class="marginalia-article">
+  <h3>{{ post.data.title }}</h3>
+  {% set bookParts = post.data.book.split(' | ') %}
+  <p class="subtitle">'{{ bookParts[0] }}'{% if bookParts[1] %} | {{ bookParts[1] }}{% endif %}</p>
   <time datetime="{{ post.date | htmlDate }}">{{ post.date | readableDate }}</time>
 </article>
+</a>
 {% endfor %}
 <p style="margin-left: 1rem;" class="secondary">More to come...</p>
 </section>

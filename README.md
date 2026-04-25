@@ -33,6 +33,8 @@ npm run serve
 - `src/index.njk` — homepage source
 - `src/marginalia.njk` — marginalia listing page
 - `src/marginalia/*.md` — markdown posts for each marginalia entry
+- `src/fragments.njk` — fragments listing page
+- `src/fragments/*.md` — markdown mini-essays between 200 and 250 words
 - `src/404.njk` — Eleventy 404 page
 - `css/`, `js/`, `images/`, `assets/` — static assets copied through unchanged
 
