@@ -67,7 +67,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-main);
     font-family: var(--font-sans);
-    line-height: 1.6;
+    line-height: 1.5;
     max-width: 680px;
     margin: 0 auto;
     padding: 2rem 1.5rem;
@@ -317,12 +317,6 @@ h1, h2, h3 {
     margin-top: 0.75rem;
 }
 
-.fragment-body {
-    line-height: 1.85;
-    font-size: 1rem;
-    letter-spacing: 0.01em;
-}
-
 .fragment-body i,
 .fragment-body em {
     color: var(--text-highlight);
@@ -455,25 +449,40 @@ h1, h2, h3 {
     }
 
     .fragment-detail {
-        padding-right: 1.5rem;
+        padding: 1.75rem 1rem 1.75rem 1rem;
     }
 
     .fragment-detail h1 {
         font-size: 1.35rem;
     }
 
+    .fragment-nav-link:hover::after {
+        max-width: 140px;
+        white-space: normal;
+        word-wrap: break-word;
+    }
+
     .fragment-navigation {
+        flex-wrap: wrap;
         justify-content: center;
         text-align: center;
+        gap: 1rem;
+    }
+
+    .fragment-navigation > .fragment-share {
+        order: -1;
+        flex-basis: 100%;
+        width: 100%;
     }
 
     .fragment-navigation > .fragment-nav {
         min-width: auto;
-        flex: 1 1 100%;
+        flex: 0 1 calc(50% - 0.5rem);
     }
 
-    .fragment-navigation > .fragment-share {
-        max-width: 100%;
+    .fragment-prev,
+    .fragment-next {
+        justify-content: center;
     }
 }
 
