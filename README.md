@@ -90,6 +90,36 @@ npm run build
 npm run serve
 ```
 
+## Adding a new fragment
+
+1. Create a new file in `src/fragments/` with a `.md` extension.
+2. Add front matter at the top, for example:
+
+```yaml
+---
+layout: layouts/fragment.njk
+title: Your Fragment Title
+description: A short page description for SEO and social sharing.
+date: 2026-04-10
+permalink: "/fragments/your-fragment-slug.html"
+---
+```
+
+3. Write your fragment body below the front matter. Fragment pages are rendered as mini-essays in the `src/fragments/` collection.
+4. The fragment listing page uses `description` to render the card subtitle, so keep it concise.
+
+5. Build the site again:
+
+```bash
+npm run build
+```
+
+6. Preview locally:
+
+```bash
+npm run serve
+```
+
 ## Notes
 
 - The old static HTML files have been moved out of the root so the site works as a clean Eleventy project.
