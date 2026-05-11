@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "description": "Static blog generated with Eleventy",
   "scripts": {
+    "prebuild": "node tools/clean-site.js",
     "build": "eleventy",
+    "predeploy": "node tools/clean-docs.js",
     "deploy": "npm run build && node tools/generate-sitemap.js && node tools/copy-docs.js",
     "serve": "eleventy --serve",
     "watch": "eleventy --watch"
