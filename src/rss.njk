@@ -1,0 +1,27 @@
+---
+permalink: /rss.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>{{ site.title }}</title>
+    <description>{{ site.description }}</description>
+    <link>{{ site.url }}</link>
+    <language>en-us</language>
+    <lastBuildDate>{{ "now" | rfc822Date }}</lastBuildDate>
+    {% set allPosts = collections.fragments.concat(collections.marginalia) | sort(reverse=true, attribute="date") -%}
+    {% for post in allPosts %}
+    <item>
+      <title>{{ post.data.title }}</title>
+      <link>{{ site.url }}{{ post.url }}</link>
+      <guid>{{ site.url }}{{ post.url }}</guid>
+      <pubDate>{{ post.date | rfc822Date }}</pubDate>
+      <description>{{ post.data.description }}</description>
+      <content:encoded><![CDATA[
+        {{ post.templateContent | safe }}
+      ]]></content:encoded>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>
