@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>raoulyy blog</title>
-  <meta name="description" content="dreaming a thought that could dream about a thought">
+  <title>Backlinks — raoulyy blog</title>
+  <meta name="description" content="Search backlinks for keywords across fragments and marginalia.">
   <meta name="theme-color" content="#ffffff">
-  <link rel="canonical" href="https://raoulyy.blog/">
+  <link rel="canonical" href="https://raoulyy.blog/backlinks.html">
   <link rel="alternate" type="application/rss+xml" title="raoulyy blog" href="/rss.xml">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="icon" href="/images/rosette.png" type="image/png">
@@ -17,16 +17,16 @@
   
 
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://raoulyy.blog/">
+  <meta property="og:url" content="https://raoulyy.blog/backlinks.html">
   <meta property="og:site_name" content="raoulyy blog">
-  <meta property="og:title" content="raoulyy blog">
-  <meta property="og:description" content="dreaming a thought that could dream about a thought">
+  <meta property="og:title" content="Backlinks — raoulyy blog">
+  <meta property="og:description" content="Search backlinks for keywords across fragments and marginalia.">
   <meta property="og:image" content="https://raoulyy.blog/images/social-preview.jpg">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://raoulyy.blog/">
-  <meta name="twitter:title" content="raoulyy blog">
-  <meta name="twitter:description" content="dreaming a thought that could dream about a thought">
+  <meta name="twitter:url" content="https://raoulyy.blog/backlinks.html">
+  <meta name="twitter:title" content="Backlinks — raoulyy blog">
+  <meta name="twitter:description" content="Search backlinks for keywords across fragments and marginalia.">
   <meta name="twitter:image" content="https://raoulyy.blog/images/social-preview.jpg">
 </head>
 
@@ -50,32 +50,26 @@
 
   <main>
     
-      <h1>raoulyy<img src="/images/rosette.png" alt="rosette" class="inline-rosette">blog</h1>
-<p class="secondary">dreaming a thought that could dream about a thought</p>
-<br>
-<img src="/images/profile.jpg" alt="Raoulyy, author profile photo" width="120" class="profile-image" />
+      
+<div class="backlinks-page">
+  <section class="backlinks-search">
+    <h1>Backlinks</h1>
+    <p>Search a keyword or click a wiki link such as <a href="/backlinks.html?term=love" class="backlink-inline">love</a> to see where it appears across fragments and marginalia.</p>
+    <form id="backlinks-search-form" class="backlinks-form">
+      <label for="backlink-term">Keyword</label>
+      <input id="backlink-term" name="term" type="search" placeholder="love" autocomplete="off">
+      <button type="submit">Search</button>
+    </form>
+  </section>
 
-<section aria-labelledby="welcome">
-  Hello friend, welcome to my blog!
-  <br /><br />
-  My friends sometimes call me <i>Raoulyy</i> (hence the name of the blog).
-  I like reading and thinking about big and small questions mostly related to meaning, love, community,
-  wisdom, faith, human psychology, personal growth and more.
-  <br /><br />
-  For now I will mostly be posting my thoughts on books that I read in the last few years.
-  Some of them are more classical book reviews, while others might better be called meanderings loosely
-  inspired by certain books, or notes written in the margins.
-  <br />
-  <a href="/marginalia.html" class="view-all secondary">View all marginalia &rarr;</a>
+  <section id="backlink-results" class="backlink-results"></section>
 
-  <br /><br />
-  I also publish shorter mini-essays in a new fragments section.
-  <br />
-  <a href="/fragments.html" class="view-all secondary">View all fragments &rarr;</a>
-
-  <br /><br />
-  In the future I might start posting more general articles, so stay tuned.
-</section>
+    <section class="backlinks-tags-section">
+    <h2>Popular keywords</h2>
+    <p>Browse the most referenced keywords and click one to load its backlinks.</p>
+    <div id="backlink-tags" class="backlink-tags"></div>
+  </section>
+</div>
 
     
   </main>
