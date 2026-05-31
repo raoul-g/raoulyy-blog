@@ -242,6 +242,13 @@
         "collection": "fragments",
         "date": "2026-05-11T00:00:00.000Z",
         "snippet": "…here the other is coming from, what the story is that the other inhabits. In order to do this, one ne…"
+      },
+      {
+        "title": "There is Truth But I Can't Have It",
+        "url": "/fragments/there-is-truth-but-i-cant-have-it.html",
+        "collection": "fragments",
+        "date": "2026-05-31T00:00:00.000Z",
+        "snippet": "…ve my perspective as an attack on their story. What I can do instead is present an idea that nudges t…"
       }
     ]
   },
@@ -292,6 +299,13 @@
         "collection": "fragments",
         "date": "2026-05-11T00:00:00.000Z",
         "snippet": "…apacity to see the world from another's perspective. This capacity is not something that we have by default…"
+      },
+      {
+        "title": "There is Truth But I Can't Have It",
+        "url": "/fragments/there-is-truth-but-i-cant-have-it.html",
+        "collection": "fragments",
+        "date": "2026-05-31T00:00:00.000Z",
+        "snippet": "…oes acknowledging the limits of any one perspective mean that all perspectives are equally valid? This is a…"
       }
     ]
   },
@@ -369,17 +383,65 @@
       }
     ]
   },
+  "relativism": {
+    "term": "relativism",
+    "mentions": [
+      {
+        "title": "There is Truth But I Can't Have It",
+        "url": "/fragments/there-is-truth-but-i-cant-have-it.html",
+        "collection": "fragments",
+        "date": "2026-05-31T00:00:00.000Z",
+        "snippet": "…or perspective. According to postmodern relativism, there is no truth, only a myriad of subjective opi…"
+      }
+    ]
+  },
+  "truth": {
+    "term": "truth",
+    "mentions": [
+      {
+        "title": "There is Truth But I Can't Have It",
+        "url": "/fragments/there-is-truth-but-i-cant-have-it.html",
+        "collection": "fragments",
+        "date": "2026-05-31T00:00:00.000Z",
+        "snippet": "…postmodern relativism, there is no truth, only a myriad of subjective opinions. If this truly we…"
+      }
+    ]
+  },
+  "fundamentalism": {
+    "term": "fundamentalism",
+    "mentions": [
+      {
+        "title": "There is Truth But I Can't Have It",
+        "url": "/fragments/there-is-truth-but-i-cant-have-it.html",
+        "collection": "fragments",
+        "date": "2026-05-31T00:00:00.000Z",
+        "snippet": "…e such a premise almost always leads to fundamentalism and leaves little room for fruitful discussions. The s…"
+      }
+    ]
+  },
+  "dialog": {
+    "term": "dialog",
+    "mentions": [
+      {
+        "title": "There is Truth But I Can't Have It",
+        "url": "/fragments/there-is-truth-but-i-cant-have-it.html",
+        "collection": "fragments",
+        "date": "2026-05-31T00:00:00.000Z",
+        "snippet": "…, but doing so is only possible through dialog and mutual understanding. Truth thus becomes something…"
+      }
+    ]
+  },
   "_terms": [
     {
-      "term": "God",
-      "count": 3
-    },
-    {
       "term": "story",
-      "count": 3
+      "count": 4
     },
     {
       "term": "perspective",
+      "count": 4
+    },
+    {
+      "term": "God",
       "count": 3
     },
     {
@@ -468,6 +530,22 @@
     },
     {
       "term": "attention",
+      "count": 1
+    },
+    {
+      "term": "relativism",
+      "count": 1
+    },
+    {
+      "term": "truth",
+      "count": 1
+    },
+    {
+      "term": "fundamentalism",
+      "count": 1
+    },
+    {
+      "term": "dialog",
       "count": 1
     }
   ]
