@@ -53,6 +53,13 @@
         "collection": "fragments",
         "date": "2026-05-11T00:00:00.000Z",
         "snippet": "…tive teacher Daniel Thorson defines love as the capacity to see the world from another's [[persp…"
+      },
+      {
+        "title": "More Power to You",
+        "url": "/fragments/more-power-to-you.html",
+        "collection": "fragments",
+        "date": "2026-06-25T00:00:00.000Z",
+        "snippet": "…spective you are currently holding, and love as the capacity to see the world from another's perspec…"
       }
     ]
   },
@@ -306,6 +313,13 @@
         "collection": "fragments",
         "date": "2026-05-31T00:00:00.000Z",
         "snippet": "…oes acknowledging the limits of any one perspective mean that all perspectives are equally valid? This is a…"
+      },
+      {
+        "title": "More Power to You",
+        "url": "/fragments/more-power-to-you.html",
+        "collection": "fragments",
+        "date": "2026-06-25T00:00:00.000Z",
+        "snippet": "…ability to get others to see from your perspective. 'Power' is a difficult word as we have lots of negati…"
       }
     ]
   },
@@ -332,6 +346,13 @@
         "collection": "fragments",
         "date": "2026-05-11T00:00:00.000Z",
         "snippet": "…'s own perspective. We can thus see how wisdom is required in order to love. What's remarkable is that…"
+      },
+      {
+        "title": "More Power to You",
+        "url": "/fragments/more-power-to-you.html",
+        "collection": "fragments",
+        "date": "2026-06-25T00:00:00.000Z",
+        "snippet": "…that I considered to be very fruitful: wisdom as the ability to drop all perspectives to go beyond wh…"
       }
     ]
   },
@@ -431,13 +452,53 @@
       }
     ]
   },
+  "power": {
+    "term": "power",
+    "mentions": [
+      {
+        "title": "More Power to You",
+        "url": "/fragments/more-power-to-you.html",
+        "collection": "fragments",
+        "date": "2026-06-25T00:00:00.000Z",
+        "snippet": "…definitions, we can then finally define power as the ability to get others to see from your [[perspec…"
+      }
+    ]
+  },
+  "collaboration": {
+    "term": "collaboration",
+    "mentions": [
+      {
+        "title": "More Power to You",
+        "url": "/fragments/more-power-to-you.html",
+        "collection": "fragments",
+        "date": "2026-06-25T00:00:00.000Z",
+        "snippet": "…on their own - they are the results of collaboration, be it by contemporaries or by people building on the k…"
+      }
+    ]
+  },
+  "alignment": {
+    "term": "Alignment",
+    "mentions": [
+      {
+        "title": "More Power to You",
+        "url": "/fragments/more-power-to-you.html",
+        "collection": "fragments",
+        "date": "2026-06-25T00:00:00.000Z",
+        "snippet": "…In other words, they require alignment. Alignment emerges when people can at least partly share a perspec…"
+      }
+    ]
+  },
   "_terms": [
+    {
+      "term": "perspective",
+      "count": 5
+    },
     {
       "term": "story",
       "count": 4
     },
     {
-      "term": "perspective",
+      "term": "wisdom",
       "count": 4
     },
     {
@@ -445,12 +506,8 @@
       "count": 3
     },
     {
-      "term": "wisdom",
-      "count": 3
-    },
-    {
       "term": "love",
-      "count": 2
+      "count": 3
     },
     {
       "term": "Paul Tillich",
@@ -546,6 +603,18 @@
     },
     {
       "term": "dialog",
+      "count": 1
+    },
+    {
+      "term": "power",
+      "count": 1
+    },
+    {
+      "term": "collaboration",
+      "count": 1
+    },
+    {
+      "term": "Alignment",
       "count": 1
     }
   ]
