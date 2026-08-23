@@ -488,6 +488,30 @@
       }
     ]
   },
+  "change": {
+    "term": "change",
+    "mentions": [
+      {
+        "title": "Wanting to Want",
+        "url": "/fragments/wanting-to-want.html",
+        "collection": "fragments",
+        "date": "2026-08-23T00:00:00.000Z",
+        "snippet": "I am often wondering how change is possible - in others, and especially in me. What are…"
+      }
+    ]
+  },
+  "willpower": {
+    "term": "Willpower",
+    "mentions": [
+      {
+        "title": "Wanting to Want",
+        "url": "/fragments/wanting-to-want.html",
+        "collection": "fragments",
+        "date": "2026-08-23T00:00:00.000Z",
+        "snippet": "…I want to start with just one of them. Willpower: The most simplistic approach is to say that people cha…"
+      }
+    ]
+  },
   "_terms": [
     {
       "term": "perspective",
@@ -615,6 +639,14 @@
     },
     {
       "term": "Alignment",
+      "count": 1
+    },
+    {
+      "term": "change",
+      "count": 1
+    },
+    {
+      "term": "Willpower",
       "count": 1
     }
   ]
