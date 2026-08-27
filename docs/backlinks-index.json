@@ -509,6 +509,49 @@
         "collection": "fragments",
         "date": "2026-08-23T00:00:00.000Z",
         "snippet": "…I want to start with just one of them. Willpower: The most simplistic approach is to say that people cha…"
+      },
+      {
+        "title": "Tied to the Mast",
+        "url": "/fragments/tied-to-the-mast.html",
+        "collection": "fragments",
+        "date": "2026-08-27T00:00:00.000Z",
+        "snippet": "Studies have shown that willpower is a limited resource (though people seem to be less li…"
+      }
+    ]
+  },
+  "constraints": {
+    "term": "constraints",
+    "mentions": [
+      {
+        "title": "Tied to the Mast",
+        "url": "/fragments/tied-to-the-mast.html",
+        "collection": "fragments",
+        "date": "2026-08-27T00:00:00.000Z",
+        "snippet": "…d willpower, impose on yourself certain constraints that put you in a place where acting in accordance with…"
+      }
+    ]
+  },
+  "present moment": {
+    "term": "present moment",
+    "mentions": [
+      {
+        "title": "Tied to the Mast",
+        "url": "/fragments/tied-to-the-mast.html",
+        "collection": "fragments",
+        "date": "2026-08-27T00:00:00.000Z",
+        "snippet": "…tricky. On the one hand, living in the present moment is important for a fulfilled life. After all, who can g…"
+      }
+    ]
+  },
+  "sacrifices": {
+    "term": "sacrifices",
+    "mentions": [
+      {
+        "title": "Tied to the Mast",
+        "url": "/fragments/tied-to-the-mast.html",
+        "collection": "fragments",
+        "date": "2026-08-27T00:00:00.000Z",
+        "snippet": "…e time we should be really aware of the sacrifices they demand and consider in each specific case if they…"
       }
     ]
   },
@@ -535,6 +578,10 @@
     },
     {
       "term": "Paul Tillich",
+      "count": 2
+    },
+    {
+      "term": "Willpower",
       "count": 2
     },
     {
@@ -646,7 +693,15 @@
       "count": 1
     },
     {
-      "term": "Willpower",
+      "term": "constraints",
+      "count": 1
+    },
+    {
+      "term": "present moment",
+      "count": 1
+    },
+    {
+      "term": "sacrifices",
       "count": 1
     }
   ]
