@@ -114,7 +114,7 @@ flowchart TB
         MDLIB["markdown-it (Eleventy's)<br/>+ linkify · typographer"]
         COLL["Collections<br/>marginalia = src/marginalia/*.md<br/>fragments = src/fragments/*.md<br/>(both sorted newest first)"]
         TOP["Collection 'topics'<br/>lib/topics.js over rawInput of all posts<br/>only topics in ≥ 2 posts"]
-        FILT["Filters<br/>htmlDate · readableDate<br/>wikilinks · topicRedirects"]
+        FILT["Filters<br/>htmlDate · readableDate<br/>wikilinks · topicRedirects · relatedTopics"]
         RSSP["@11ty/eleventy-plugin-rss<br/>dateToRfc822 · getNewestCollectionItemDate<br/>+ HTML base plugin (renderTransforms)"]
         XFORM["Transform 'wikilinks' (*.html)<br/>[[term]] → link to /topics/slug.html<br/>or plain text if the topic has no page"]
         PT["Passthrough copy<br/>css · js · images · CNAME<br/>robots.txt"]
@@ -157,8 +157,8 @@ flowchart TB
 ```mermaid
 flowchart TB
     BASE["<b>layouts/base.njk</b><br/>head: title, meta description, noindex (if set), canonical,<br/>Open Graph + Twitter card, RSS link, style.css, font preloads<br/>header: nav + theme toggle checkbox<br/>+ inline script restoring saved theme<br/><i>block content</i><br/>footer: year, RSS icon<br/>script: /js/main.js"]
-    MARG["<b>layouts/marginalia.njk</b><br/>wraps content in div.review-body"]
-    FRAG["<b>layouts/fragment.njk</b><br/>finds own index in collections.fragments<br/>number = total − index<br/>prev / next links with tooltip<br/>Share Fragment button"]
+    MARG["<b>layouts/marginalia.njk</b><br/>wraps content in div.review-body<br/>+ connected.njk"]
+    FRAG["<b>layouts/fragment.njk</b><br/>finds own index in collections.fragments<br/>number = total − index<br/>connected.njk (Connected posts box)<br/>prev / next links with tooltip<br/>Share Fragment button"]
 
     MARG -- extends --> BASE
     FRAG -- extends --> BASE
@@ -178,8 +178,8 @@ flowchart TB
 | `/index.html` | `index.njk` | static text |
 | `/marginalia.html` | `marginalia.njk` | `collections.marginalia` → title, `book` (split on ` \| `), date |
 | `/fragments.html` | `fragments.njk` | `collections.fragments` → number, title, description, date |
-| `/fragments/*.html` | `fragment.njk` layout | `collections.fragments` for numbering + prev/next |
-| `/marginalia/*.html` | `marginalia.njk` layout | post content |
+| `/fragments/*.html` | `fragment.njk` layout | `collections.fragments` for numbering + prev/next; `relatedTopics` for the Connected posts box |
+| `/marginalia/*.html` | `marginalia.njk` layout | post content; `relatedTopics` for the Connected posts box |
 | `/hidden/*.html` | `marginalia.njk` layout (via `hidden.json`) | excluded from collections, so not listed, not in RSS, topics, or sitemap; `noindex` meta tag |
 | `/rss.xml` | `rss.njk` | fragments + marginalia merged, sorted by date, full content through `wikilinks` and then `renderTransforms` with `site.url` (absolute links) |
 | `/topics.html` | `topics.njk` | `collections.topics` → term, number of posts |
@@ -195,6 +195,7 @@ Writing `[[willpower]]` in a fragment or marginalia post marks *willpower* as a 
 
 - **A topic gets a page once it connects at least two posts** (`MIN_POSTS` in `lib/topics.js`). Only then do its `[[…]]` mentions become links. Topics used in a single post render as plain text, but they stay indexed and turn into links automatically when a second post mentions them.
 - **Each topic page** (`/topics/<slug>.html`) lists every post that mentions the topic, newest first. Each card shows the sentence the term appears in, with the term highlighted.
+- **Each post ends with a "Connected posts" box** (`_includes/connected.njk`, included by both post layouts). For every topic in the post that has a page, it lists up to three *other* posts that mention it, plus "+N more" linking to the topic page. Posts without such topics show no box.
 - **Spelling variants share one topic.** Topics are keyed by slug, so `[[Willpower]]` and `[[willpower]]` are the same topic. The lowercase spelling is shown unless every mention is capitalized (e.g. *God*, *Paul Tillich*).
 
 ```mermaid
@@ -208,11 +209,13 @@ flowchart TB
         LIST["topics.njk<br/>→ /topics.html"]
         FEED["rss.njk<br/>content | wikilinks | renderTransforms<br/>→ absolute topic links"]
         REDIR["backlinks.njk<br/>→ /backlinks.html redirect"]
+        BOX["connected.njk in post layouts<br/>relatedTopics(page.url)<br/>→ Connected posts box"]
     end
 
     POSTS --> IDX --> COLLT
     COLLT --> TPL & LIST & REDIR
     IDX -. "which topics are linkable" .-> XF
+    IDX -. "other posts per topic" .-> BOX
     POSTS --> XF
     POSTS --> FEED
 ```

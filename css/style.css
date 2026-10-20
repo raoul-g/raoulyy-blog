@@ -655,6 +655,49 @@ footer {
     padding: 0 0.1em;
 }
 
+/* "Connected posts" box at the end of a post */
+.connected {
+    margin: 2rem 0;
+    padding: 1rem 1.25rem;
+    border-top: none;
+    border-radius: 1rem;
+    background: rgba(250, 175, 80, 0.06);
+}
+
+.connected h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.05rem;
+}
+
+.connected ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.95rem;
+}
+
+.connected a {
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 0.2em;
+}
+
+.connected a:hover {
+    text-decoration-color: var(--text-highlight);
+}
+
+.connected .connected-topic {
+    color: var(--text-highlight);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.connected .connected-more {
+    color: var(--text-muted);
+}
+
 .topic-link {
     color: var(--text-highlight);
     text-decoration: underline;

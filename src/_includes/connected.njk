@@ -1,0 +1,19 @@
+{#- Topics in this post that also appear in other posts (see lib/topics.js). Renders nothing if there are none. -#}
+{%- set connections = page.url | relatedTopics -%}
+{%- if connections | length %}
+<aside class="connected" aria-labelledby="connected-heading">
+  <h2 id="connected-heading">Connected posts</h2>
+  <ul>
+  {%- for topic in connections %}
+    <li>
+      <a href="/topics/{{ topic.slug }}.html" class="connected-topic">{{ topic.term }}</a>
+      <span aria-hidden="true">→</span>
+      {% for other in topic.others.slice(0, 3) -%}
+        <a href="{{ other.url }}">{{ other.title }}</a>{% if not loop.last %} · {% endif %}
+      {%- endfor %}
+      {%- if topic.others.length > 3 %} · <a href="/topics/{{ topic.slug }}.html" class="connected-more">+{{ topic.others.length - 3 }} more</a>{% endif %}
+    </li>
+  {%- endfor %}
+  </ul>
+</aside>
+{%- endif %}

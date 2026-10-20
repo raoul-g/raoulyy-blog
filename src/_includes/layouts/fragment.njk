@@ -23,6 +23,8 @@
       {{ content | safe }}
     </div>
 
+    {% include "connected.njk" %}
+
     <div class="fragment-navigation">
       <div class="fragment-nav fragment-prev">
         {%- if currentIndex < collections.fragments | length - 1 -%}

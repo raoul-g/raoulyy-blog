@@ -36,6 +36,8 @@ module.exports = function(eleventyConfig) {
     return topicIndex.linkable;
   });
 
+  eleventyConfig.addFilter("relatedTopics", (url) => topicIndex.relatedFor(url));
+
   eleventyConfig.addFilter("topicRedirects", (topicList) => {
     return Object.fromEntries(topicList.flatMap((topic) => topic.aliases.map((alias) => [alias, topic.slug])));
   });
