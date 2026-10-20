@@ -1,9 +1,6 @@
 const themeToggle = document.getElementById('theme-toggle-checkbox');
 
-// 1. Restore state from localStorage on page load
-if (localStorage.getItem('theme-override') === 'true') {
-    themeToggle.checked = true;
-}
+// 1. Saved state is restored by an inline script in base.njk (before first paint)
 
 // 2. Save state to localStorage whenever the checkbox changes
 if (themeToggle) {

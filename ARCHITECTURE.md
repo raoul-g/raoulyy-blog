@@ -161,7 +161,7 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    BASE["<b>layouts/base.njk</b><br/>head: title, meta description, canonical,<br/>Open Graph + Twitter card, RSS link, style.css<br/>header: nav + theme toggle checkbox<br/><i>block content</i><br/>footer: year, RSS icon<br/>script: /js/main.js"]
+    BASE["<b>layouts/base.njk</b><br/>head: title, meta description, canonical,<br/>Open Graph + Twitter card, RSS link, style.css<br/>header: nav + theme toggle checkbox<br/>+ inline script restoring saved theme<br/><i>block content</i><br/>footer: year, RSS icon<br/>script: /js/main.js"]
     MARG["<b>layouts/marginalia.njk</b><br/>wraps content in div.review-body"]
     FRAG["<b>layouts/fragment.njk</b><br/>finds own index in collections.fragments<br/>number = total − index<br/>prev / next links with tooltip<br/>Share Fragment button"]
 
@@ -241,14 +241,15 @@ Terms are case-insensitive (`[[Willpower]]` and `[[willpower]]` share one entry)
 
 ## 6. Client-side runtime (`js/main.js`)
 
-A single script, loaded at the end of `<body>` on every page:
+A single script, loaded at the end of `<body>` on every page. The only exception is restoring the saved theme, which happens in a tiny inline script right after the toggle in `base.njk`, so the page never paints in the wrong theme first:
 
 ```mermaid
 flowchart TD
-    LOAD(["Page load: main.js"]) --> T1
+    INLINE(["Inline script in header<br/>(runs before first paint)"]) --> T1
     T1{"localStorage<br/>theme-override == 'true'?"} -- yes --> T2["check #theme-toggle-checkbox"]
-    T1 -- no --> T3
-    T2 --> T3["on change → save checked state<br/>to localStorage"]
+    T1 -- no --> LOAD
+    T2 --> LOAD
+    LOAD(["End of body: main.js"]) --> T3["on change → save checked state<br/>to localStorage"]
     T3 --> Y["set #current-year to current year"]
     Y --> S{"#share-btn exists?<br/>(fragment pages)"}
     S -- yes --> S2["on click: navigator.share()<br/>fallback → clipboard.writeText(url)"]
@@ -263,7 +264,7 @@ flowchart TD
 
 ### Theme toggle: CSS only, JS just remembers the choice
 
-The checkbox **inverts** whatever the OS prefers. CSS does the switch with `:root:has(#theme-toggle-checkbox:checked)` inside `prefers-color-scheme` media queries. JS only saves and restores the checkbox state.
+The checkbox **inverts** whatever the OS prefers. CSS does the switch with `:root:has(#theme-toggle-checkbox:checked)` inside `prefers-color-scheme` media queries. JS only saves (`main.js`) and restores (inline script in `base.njk`) the checkbox state.
 
 ```mermaid
 stateDiagram-v2
@@ -334,7 +335,6 @@ Found while analysing the project. None of them break the site, but they're good
 - **Dead passthrough entries:** `assets` and `404.html` don't exist at the root (the 404 page comes from `src/404.njk`).
 - **Two wikilink mechanisms:** the markdown-it plugin handles Markdown, and the HTML transform handles everything else (and re-checks link classes). The transform alone would be enough, but the plugin avoids regex-on-HTML for content.
 - **Backlink snippets come from raw Markdown**, so inline HTML or Markdown syntax next to a `[[term]]` can show up in the snippet text (it's escaped, so it's safe).
-- **Theme flash:** `main.js` runs at the end of `<body>`, so a returning visitor with the override set may briefly see the OS theme before the checkbox is restored.
 - **`og:type`** is `article` only for URLs containing `marginalia`. Fragments get `website`.
 - **`src/404.njk`** nests its own `<main>` inside the layout's `<main>`.
 - **`archive-old-html/`** isn't used by the build anymore.

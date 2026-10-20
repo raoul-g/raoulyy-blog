@@ -51,6 +51,12 @@
         </a></li>
         <input type="checkbox" id="theme-toggle-checkbox" aria-label="Toggle Dark Mode">
         <label for="theme-toggle-checkbox" class="theme-toggle-label" title="Toggle Theme"></label>
+        <script>
+          // Restore the saved theme right away (before the page is painted) to avoid a flash of the wrong theme
+          if (localStorage.getItem('theme-override') === 'true') {
+            document.getElementById('theme-toggle-checkbox').checked = true;
+          }
+        </script>
       </ul>
     </nav>
   </header>
