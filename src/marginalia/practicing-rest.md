@@ -23,7 +23,7 @@ What Brueggemann points at is indeed a huge problem. In our consumerist society 
 
 Inequality is hardly a new phenomenon, and Sabbath, according to Brueggemann, has an equalizing power: _"Sabbath is the great day of equality when all are equally at rest. Not all are equal in production. Some perform much more effectively than others. Not all are equal in consumption. Some have greater access to consumer goods [...] Because this one day breaks the pattern of coercion, all are like you, equal—equal worth, equal value, equal access, equal rest."_
 
-This equality fosters what Brueggemann understands as the final purpose of Sabbath: the creation of the _"neighborly reality of the community beloved by God"_, which can be understood, among other things, as an environment of security, respect, dignity and love.
+This equality fosters what Brueggemann understands as the final purpose of Sabbath: the creation of the _"neighborly reality of the community beloved by God"_, which can be understood, among other things, as an environment of security, respect, dignity and [[love]].
 
 I want to end the review with one final quote from the book which sums up the problem again, and thus indicates why the idea of Sabbath is still prophetically potent, even if each one of us might find his or her own way of practicing it: _"Indeed, our consumer society is grounded in the generation of artificial desires, readily transposed into urgent needs. The always-emerging new desires and new needs create a restless striving that sets neighbor against neighbor in order to get ahead, to have an advantage, and to accumulate at the expense of the other. The power of such a compulsion to 'get,' of course, negates neighborly possibility."_
 
