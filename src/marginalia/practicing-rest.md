@@ -6,9 +6,6 @@ date: 2025-07-17
 permalink: "/marginalia/practicing-rest.html"
 ---
 
-<p class="book-title">'Sabbath as Resistance: Saying No to the Culture of Now' | Walter Brueggemann</p>
-<h1 class="review-title">Practicing Rest</h1>
-
 Rest in peace! I was very sad when I found out that Walter Brueggemann had died just about a month ago. He was an appreciated Biblical scholar and theologian focused on the Old Testament. He was especially well known for his understanding of prophetic work: _“It is the vocation of the prophet to keep alive the ministry of imagination, to keep on conjuring and proposing future alternatives to the single one the king wants to urge as the only thinkable one”_. According to this understanding, he himself can definitely be seen as a modern day prophet: he was very critical of American consumerism and nationalism.
 
 This book is definitely not missing a certain prophetic dimension in that sense. It is a study of the concept of Sabbath in the Jewish tradition, its underlying principles and what applying them in today's world could look like.
@@ -26,15 +23,3 @@ Inequality is hardly a new phenomenon, and Sabbath, according to Brueggemann, ha
 This equality fosters what Brueggemann understands as the final purpose of Sabbath: the creation of the _"neighborly reality of the community beloved by God"_, which can be understood, among other things, as an environment of security, respect, dignity and [[love]].
 
 I want to end the review with one final quote from the book which sums up the problem again, and thus indicates why the idea of Sabbath is still prophetically potent, even if each one of us might find his or her own way of practicing it: _"Indeed, our consumer society is grounded in the generation of artificial desires, readily transposed into urgent needs. The always-emerging new desires and new needs create a restless striving that sets neighbor against neighbor in order to get ahead, to have an advantage, and to accumulate at the expense of the other. The power of such a compulsion to 'get,' of course, negates neighborly possibility."_
-
-<div class="publish-meta">
-  <span class="publish-label">thoughts collected by</span>
-  <time class="publish-time" datetime="2025-07-17">July 17, 2025</time>
-</div>
-<hr class="marginalia-divider" />
-<div class="share-container">
-  <a href="/marginalia.html" class="view-all">Read other marginalia &rarr;</a>
-  <div class="share-actions">
-    <button id="share-btn" class="share-btn">Share Article</button>
-  </div>
-</div>

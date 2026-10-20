@@ -12,8 +12,7 @@ permalink: "/marginalia.html"
 <a href="{{ post.url }}" class="marginalia-link">
 <article class="marginalia-article">
   <h3>{{ post.data.title }}</h3>
-  {% set bookParts = post.data.book.split(' | ') %}
-  <p class="subtitle">'{{ bookParts[0] }}'{% if bookParts[1] %} | {{ bookParts[1] }}{% endif %}</p>
+  <p class="subtitle">{{ post.data.book | bookLine }}</p>
   <time datetime="{{ post.date | htmlDate }}">{{ post.date | readableDate }}</time>
 </article>
 </a>

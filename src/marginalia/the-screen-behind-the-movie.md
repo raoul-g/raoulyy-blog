@@ -6,9 +6,6 @@ date: 2026-06-30
 permalink: "/marginalia/the-screen-behind-the-movie.html"
 ---
 
-<p class="book-title">'Being Aware of Being Aware' | Rupert Spira</p>
-<h1 class="review-title">The Screen Behind the Movie</h1>
-
 You are a self. Intuitively this seems like the most basic fact about your existence. Yet, in the first months of your life, your selfhood wasn't fully developed. You had some body awareness, but no self-concept. Awareness, then, is even more foundational for our existence than selfhood. Everything that we experience - our thoughts, feelings, sensations and perceptions - is experienced by means of our awareness. Except in our sleep, we are thus continually in the state of being aware. It is the continuous element in all changing experience. But are we ever actually aware of this awareness itself?</br>
 'Being Aware of Being Aware' is the title of this book by Rupert Spira in which he offers meditations on what is known in the Vedantic tradition as the <em>"Direct Path"</em>, whose culmination is the <em>"recognition of the presence, the primacy and the nature of awareness - or, in religious language, spirit or God's infinite being - which transcends all knowledge and experience."</em>
 One of the first things Spira notes is something that we can probably all confirm from our experience: <em>Being aware</em> itself usually remains unnoticed due to the exclusive focus of our [[attention]] on the objects of experience. A helpful image to understand this is the movie screen: Often when watching a movie, we are so absorbed in it that we forget that there is a screen at all, even though the screen is what makes watching the movie possible. The content of the screen keeps changing (just as the contents of our experience), but the screen itself never changes (just as <em>being aware</em> itself does not change). Just as the screen is never affected by what happens in the movie it shows, awareness itself can never be perturbed by anything that happens in experience. In this understanding, awareness (or <em>being aware</em>) is inherently whole and eternal - and this is why Spira equates it with what religious language calls <em>God's infinite being</em>.
@@ -25,15 +22,3 @@ So what's to be done? In a sense the <em>"Direct Path"</em> is a non-practice in
 Where do I stand on all of this? After having read this book and a few other perspectives on non-dualism, I can say that it doesn't seem as absurd as I thought it was initially. The most important question that remains open for me is the following: Why would these contractions in awareness (which manifest as our <em>separate selves</em>), appear in pure awareness (or oneness) in the first place? In religious lingo the same question could be asked as: Why would [[God]] create anything at all? Or in metaphysics: Why is there anything rather than nothing? Especially in the first two formulations this question carries particular weight. The existence of separate selves causes a lot of suffering. The good enabled by creation has to outweigh the enormous amount of suffering and evil that appeared in creation. While there are some possible answers to these objections.</br>
 My second struggle with this perspective is of a more practical nature: Cognitively knowing that I am aware is easy, even self-evident - but, as already mentioned above, the experience of being aware of being aware is not accessible by rational means alone. For years I have been trying different forms of meditation on and off (even did a specific "Direct Approach" guided meditation series more recently) and while I liked many of them and found them to have several positive effects - I came nowhere near this awakening experience.</br>
 Lastly, I'm not quite sure how to situate [[love]] and other values which I find most meaningful in my life, in the framework of non-dualism. If we don't actually exist as separate entities and if the world and everything we perceive is just an illusion, isn't love as an inter-personal phenomenon also just an illusion? If I deconstruct my <em>self</em> what is there left for those around me to enter into relationship with? How can there be a meaningful I-Thou relationship when both I and Thou are nothing more than figments of our imagination? Is it God loving himself all the way down? Is this all there ever was?
-
-<div class="publish-meta">
-  <span class="publish-label">thoughts collected by</span>
-  <time class="publish-time" datetime="2026-06-30">June 30, 2026</time>
-</div>
-<hr class="marginalia-divider" />
-<div class="share-container">
-  <a href="/marginalia.html" class="view-all">Read other marginalia &rarr;</a>
-  <div class="share-actions">
-    <button id="share-btn" class="share-btn">Share Article</button>
-  </div>
-</div>

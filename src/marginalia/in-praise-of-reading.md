@@ -6,9 +6,6 @@ date: 2025-12-23
 permalink: "/marginalia/in-praise-of-reading.html"
 ---
 
-<p class="book-title">'Reader Come Home: The Reading Brain in a Digital World' | Maryanne Wolf</p>
-<h1 class="review-title">In Praise of Reading</h1>
-
 > _"Among the many worlds which man did not receive as a gift of nature, but which he created with his own spirit, the world of books is the greatest."_ (Hermann Hesse)
 
 Since my childhood, I have spent countless hours of my life reading books. I always enjoyed doing it, just as there are people who don't read and claim they just never much enjoyed it. Somehow I always had a feeling that it is important for me to read, yet I never spent a lot of time thinking about the 'why'. Even now, I feel slightly reluctant to argue for the importance of reading books based on the benefits it offers. For me, reading is an end in itself - it is autotelic. But of course, this is no reason to ignore the facts about reading and how this activity (or its lack) impacts our lives and even our society.
@@ -30,15 +27,3 @@ Almost none of these processes are possible in the state of hyper attention. We 
 While reading this book I finally understood clearer than ever: Reading is important because it is so closely linked to thinking. The time a brain spends in a deep reading state is reflected in the quality and the clarity of its thinking.
 
 This is why reading is more than a hobby or a preference, it is vital for a truly democratic society: _"If we in the twenty-first century are to preserve a vital collective conscience, we must ensure that all members of our society are able to read and think both deeply and well. We will fail as a society if we do not educate our children and reeducate all of our citizenry to the responsibility of each citizen to process information vigilantly, critically, and wisely across media. And we will fail as a society as surely as societies of the twentieth century if we do not recognize and acknowledge the capacity for reflective reasoning in those who disagree with us."_
-
-<div class="publish-meta">
-  <span class="publish-label">thoughts collected by</span>
-  <time class="publish-time" datetime="2025-12-23">December 23, 2025</time>
-</div>
-<hr class="marginalia-divider" />
-<div class="share-container">
-  <a href="/marginalia.html" class="view-all">Read other marginalia &rarr;</a>
-  <div class="share-actions">
-    <button id="share-btn" class="share-btn">Share Article</button>
-  </div>
-</div>

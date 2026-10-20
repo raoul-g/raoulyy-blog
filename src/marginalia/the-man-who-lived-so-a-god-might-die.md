@@ -6,9 +6,6 @@ date: 2023-04-12
 permalink: "/marginalia/the-man-who-lived-so-a-god-might-die.html"
 ---
 
-<p class="book-title">'Barabbas' | Pär Lagerkvist</p>
-<h1 class="review-title">The Man Who Lived So a God Might Die</h1>
-
 The novel 'Barabbas' by the Swedish Nobel Prize winner Pär Lagerkvist was published in 1950. On the surface it can be summarized as the story of Barabbas - the man in whose stead [[Jesus]] was crucified according to the Gospels.
 
 The story begins with his unlikely release from prison after the crowd shouts that they would rather have Jesus crucified instead of the thief and murderer Barabbas. He is certainly quite astonished by this and follows Jesus on his way to Golgotha where he witnesses his death from a distance. His sentiment towards this supposed Messiah suffering a cruel death on the cross is one of repulsion and fascination alike, and will pursue him for the rest of his life.
@@ -30,15 +27,3 @@ Another way of understanding the death of [[God]] is by looking at the cross, an
 In the novel we see this as Barabbas observes the Christians with their supposed inner peace and loving community. The truth is, of course, that Christians experience just as much inner unrest and divisions amongst themselves as other people. The crucifixion hints at the fact that there is contradiction and antagonism even in the absolute, which means it is woven into the very fabric of reality.
 
 Ultimately, Barabbas remains just as religiously invested in the illusion of oneness as the Christian believers. Perhaps the 'death of God' is less about the absence of a deity, but the presence of a division - a fundamental 'not-at-oneness' of everything. In this understanding, salvation is not found in the illusion of wholeness in the absolute Other; instead it is found in the embrace of the fractured self and the fractured world - a realization that tragically eludes Barabbas to the very end.
-
-<div class="publish-meta">
-  <span class="publish-label">thoughts collected by</span>
-  <time class="publish-time" datetime="2023-04-12">April 12, 2023</time>
-</div>
-<hr class="marginalia-divider" />
-<div class="share-container">
-  <a href="/marginalia.html" class="view-all">Read other marginalia &rarr;</a>
-  <div class="share-actions">
-    <button id="share-btn" class="share-btn">Share Article</button>
-  </div>
-</div>

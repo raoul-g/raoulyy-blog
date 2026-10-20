@@ -1,9 +1,31 @@
 {% extends "layouts/base.njk" %}
 
+{#- Marginalia posts get their header (book, title) and footer (date, share) from front matter.
+    Pages without a `book`, like hidden pages, only show their content. -#}
 {% block content %}
   <div class="review-body">
+    {%- if book %}
+    <p class="book-title">{{ book | bookLine }}</p>
+    <h1 class="review-title">{{ title }}</h1>
+    {%- endif %}
     {{ content | safe }}
+    {%- if book %}
+    <div class="publish-meta">
+      <span class="publish-label">thoughts collected by</span>
+      <time class="publish-time" datetime="{{ page.date | htmlDate }}">{{ page.date | readableDate }}</time>
+    </div>
+    {%- endif %}
   </div>
 
   {% include "connected.njk" %}
+
+  {%- if book %}
+  <hr class="marginalia-divider" />
+  <div class="share-container">
+    <a href="/marginalia.html" class="view-all">Read other marginalia &rarr;</a>
+    <div class="share-actions">
+      <button id="share-btn" class="share-btn">Share Article</button>
+    </div>
+  </div>
+  {%- endif %}
 {% endblock %}

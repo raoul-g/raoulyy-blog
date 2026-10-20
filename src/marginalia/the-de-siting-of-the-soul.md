@@ -6,9 +6,6 @@ date: 2026-03-29
 permalink: "/marginalia/the-de-siting-of-the-soul.html"
 ---
 
-<p class="book-title">'Hyperculture: Culture and Globalisation' | Byung-Chul Han</p>
-<h1 class="review-title">The De-Siting of the Soul</h1>
-
 > _There is no longer the sort of fulfilling time that is due to a beautiful structure of past, present and future, that is, to a story, to narrative suspense. Time becomes naked, that is, devoid of narration. A point-like time, or event time, emerges. Because it is poor in horizons, this kind of time is not able to carry much meaning._ (Byung-Chul Han)
 
 A time not able to carry much meaning - this is how many people in the West experience the age we inhabit. In the past years there was a lot of discourse about the 'Meaning Crisis' - the collective inability of most people in Western societies to answer the question _"Why does any of this matter?"_
@@ -36,15 +33,3 @@ The 'Patchwork Religion' people create for themselves is missing the interpretat
 My reading of Han tells me that he would critique this approach as a regression - a 're-mythologization' that tries to respond to modernity's groundlessness by imposing a new absolute, by attempting to fill the void instead of learning to inhabit it. Peter Rollins, who has written about this existential void extensively, put it beautifully: _"While the yoke of lack might appear too heavy to bear, in truth it is only crushing when we refuse to bear it - when we force others to carry it instead."_
 
 What seems to be core to Han's solution for our current predicament is Heidegger's concept of _Gelassenheit_ - a different relationship with time, silence and otherness. He does not promise a new horizon, but rather a posture - a way of standing in the open without flinching at the nakedness.
-
-<div class="publish-meta">
-  <span class="publish-label">thoughts collected by</span>
-  <time class="publish-time" datetime="2026-03-29">March 29, 2026</time>
-</div>
-<hr class="marginalia-divider" />
-<div class="share-container">
-  <a href="/marginalia.html" class="view-all">Read other marginalia &rarr;</a>
-  <div class="share-actions">
-    <button id="share-btn" class="share-btn">Share Article</button>
-  </div>
-</div>

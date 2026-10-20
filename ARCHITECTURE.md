@@ -114,7 +114,7 @@ flowchart TB
         MDLIB["markdown-it (Eleventy's)<br/>+ linkify · typographer"]
         COLL["Collections<br/>marginalia = src/marginalia/*.md<br/>fragments = src/fragments/*.md<br/>(both sorted newest first)"]
         TOP["Collection 'topics'<br/>lib/topics.js over rawInput of all posts<br/>only topics in ≥ 2 posts"]
-        FILT["Filters<br/>htmlDate · readableDate<br/>wikilinks · topicRedirects · relatedTopics"]
+        FILT["Filters<br/>htmlDate · readableDate · bookLine<br/>wikilinks · topicRedirects · relatedTopics"]
         RSSP["@11ty/eleventy-plugin-rss<br/>dateToRfc822 · getNewestCollectionItemDate<br/>+ HTML base plugin (renderTransforms)"]
         XFORM["Transform 'wikilinks' (*.html)<br/>[[term]] → link to /topics/slug.html<br/>or plain text if the topic has no page"]
         PT["Passthrough copy<br/>css · js · images · CNAME<br/>robots.txt"]
@@ -157,7 +157,7 @@ flowchart TB
 ```mermaid
 flowchart TB
     BASE["<b>layouts/base.njk</b><br/>head: title, meta description, noindex (if set), canonical,<br/>Open Graph (og:type from ogType, default website) + Twitter card, RSS link, style.css, font preloads<br/>header: nav + theme toggle checkbox<br/>+ inline script restoring saved theme<br/><i>block content</i><br/>footer: year, RSS icon<br/>script: /js/main.js"]
-    MARG["<b>layouts/marginalia.njk</b><br/>wraps content in div.review-body<br/>+ connected.njk"]
+    MARG["<b>layouts/marginalia.njk</b><br/>from front matter: book line + h1,<br/>content, date ('thoughts collected by'),<br/>connected.njk, share button<br/>(header/footer only if book is set)"]
     FRAG["<b>layouts/fragment.njk</b><br/>finds own index in collections.fragments<br/>number = total − index<br/>connected.njk (Connected posts box)<br/>prev / next links with tooltip<br/>Share Fragment button"]
 
     MARG -- extends --> BASE
@@ -179,9 +179,9 @@ flowchart TB
 | `/marginalia.html` | `marginalia.njk` | `collections.marginalia` → title, `book` (split on ` \| `), date |
 | `/fragments.html` | `fragments.njk` | `collections.fragments` → number, title, description, date |
 | `/fragments/*.html` | `fragment.njk` layout | `collections.fragments` for numbering + prev/next; `relatedTopics` for the Connected posts box |
-| `/marginalia/*.html` | `marginalia.njk` layout | post content; `relatedTopics` for the Connected posts box |
+| `/marginalia/*.html` | `marginalia.njk` layout | `title`, `book`, `date` for header and footer; post content; `relatedTopics` for the Connected posts box |
 | `/hidden/*.html` | `marginalia.njk` layout (via `hidden.json`) | excluded from collections, so not listed, not in RSS, topics, or sitemap; `noindex` meta tag |
-| `/rss.xml` | `rss.njk` | fragments + marginalia merged, sorted by date, full content through `wikilinks` and then `renderTransforms` with `site.url` (absolute links) |
+| `/rss.xml` | `rss.njk` | fragments + marginalia merged, sorted by date, book line for marginalia, full content through `wikilinks` and then `renderTransforms` with `site.url` (absolute links) |
 | `/topics.html` | `topics.njk` | `collections.topics` → term, number of posts |
 | `/topics/<slug>.html` | `topic.njk` (pagination, one page per topic) | one topic's mentions: post title, snippet sentence, kind, date |
 | `/backlinks.html` | `backlinks.njk` | redirect for old links: `?term=…` → matching topic page, else `/topics.html` |
@@ -305,7 +305,7 @@ flowchart LR
 | `description` | ✓ | ✓ | meta description, fragment card subtitle, RSS `<description>` |
 | `date` | ✓ | ✓ | sort order, numbering, `<time>`, RSS `pubDate` |
 | `permalink` | ✓ | ✓ | output URL (file names like `011-…` don't affect the URL) |
-| `book` | `"Title \| Author"` | – | marginalia listing subtitle |
+| `book` | `"Title \| Author"` | – | book line on the post, marginalia listing subtitle, RSS (via the `bookLine` filter) |
 
 Fragment numbers (`#11`) aren't stored anywhere. They come from each fragment's position in the date-sorted collection, so adding one with an earlier date renumbers the ones after it.
 

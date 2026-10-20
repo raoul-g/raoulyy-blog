@@ -6,9 +6,6 @@ date: 2024-12-30
 permalink: "/marginalia/an-absurd-passion-for-the-impossible-in-times-of-despair.html"
 ---
 
-<p class="book-title">'To Have or To Be?' | Erich Fromm</p>
-<h1 class="review-title">An Absurd Passion for the Impossible in Times of Despair</h1>
-
 Towards the end of this year I finished reading _To Have or To Be_ by Erich Fromm. The title of the book hints at two radically different modes of existence that Fromm elucidates in the first part of the book. The "Having Mode" is a way of existing that is centered on the desire to acquire, possess, and control, leading to a life focused on things. In contrast to this is the "Being Mode", which is a way of living centered on inner activity, authentic experience, connection, [[love]] and growth, rather than on the acquisition and possession of things. Fromm shows that this distinction has been pointed out in the past by thinkers such as [[Buddhism|the Buddha]], [[Jesus]], Meister Eckhart, Spinoza, Marx and Albert Schweitzer.
 
 In the second part of the book Fromm offers a very accurate analysis of the individual in modern society. The "Having Mode" is clearly dominant as it serves the interest of the powerful owners of corporations under [[capitalism]] best: _"Modern consumers may identify themselves by the formula: I am = what I have and what I consume"_. This consumption cannot satisfy the individual in a meaningful way, and it even creates insecurity and anxiety: If I am defined by what I have, what happens if I lose what I have?
@@ -28,15 +25,3 @@ Fromm is right to ask: _"Considering the power of the corporations, the apathy a
 From a purely rational way of seeing things, the answer is almost certainly "No!". Does that mean we should give up? To answer using Fromm's words: _"If a sick person has even the barest chance for survival, no responsible physician will say, 'Let's give up the effort,' or will use only palliatives. On the contrary, everything conceivable is done to save the sick person's life. Certainly, a sick society cannot expect anything less."_
 
 Can we still _have_ hope in such a situation? Not really - but we might still _be_ hopeful.
-
-<div class="publish-meta">
-  <span class="publish-label">thoughts collected by</span>
-  <time class="publish-time" datetime="2024-12-30">December 30, 2024</time>
-</div>
-<hr class="marginalia-divider" />
-<div class="share-container">
-  <a href="/marginalia.html" class="view-all">Read other marginalia &rarr;</a>
-  <div class="share-actions">
-    <button id="share-btn" class="share-btn">Share Article</button>
-  </div>
-</div>

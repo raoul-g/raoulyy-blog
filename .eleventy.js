@@ -42,6 +42,12 @@ module.exports = function(eleventyConfig) {
     return Object.fromEntries(topicList.flatMap((topic) => topic.aliases.map((alias) => [alias, topic.slug])));
   });
 
+  // "Book Title | Author" (marginalia front matter) → "'Book Title' | Author"
+  eleventyConfig.addFilter("bookLine", (book) => {
+    const [bookTitle, author] = book.split(" | ");
+    return author ? `'${bookTitle}' | ${author}` : `'${bookTitle}'`;
+  });
+
   eleventyConfig.addFilter("htmlDate", (dateObj) => {
     return new Date(dateObj).toISOString().split("T")[0];
   });

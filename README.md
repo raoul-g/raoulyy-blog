@@ -71,17 +71,8 @@ permalink: "/marginalia/your-post-slug.html"
 
    No `layout` needed: every file in `src/marginalia/` gets `layouts/marginalia.njk` from `src/marginalia/marginalia.json`.
 
-3. Add your post content after the front matter.
+3. Write your post text after the front matter, nothing else. The layout adds the book line and title above it, and the "thoughts collected by" date, Connected posts box and share button below it, all from the front matter. Keep `book` in the form `"Book Title | Author Name"`.
 4. The listing page will be regenerated automatically when you build.
-
-Example content:
-
-```markdown
-<p class="book-title">'Book Title' | Author Name</p>
-<h1 class="review-title">Your Post Title</h1>
-
-Your post text here...
-```
 
 5. Build the site again:
 
