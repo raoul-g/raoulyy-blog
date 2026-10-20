@@ -146,8 +146,12 @@ The repository's Pages settings must have **Source: GitHub Actions** (Settings â
 
 ## Sitemap
 
-`sitemap.xml` is generated on every build from `src/sitemap.njk` and lists every page in `collections.all`. To keep a page out of the sitemap (as is done for `404.njk` and the `hidden/` page), add this to its front matter:
+`sitemap.xml` is generated on every build from `src/sitemap.njk` and lists every page in `collections.all`. To keep a page out of the sitemap (as is done for `404.njk`), add this to its front matter:
 
 ```yaml
 eleventyExcludeFromCollections: true
 ```
+
+## Hidden pages
+
+Pages in `src/hidden/` are only reachable via a direct link. `src/hidden/hidden.json` gives every file in that folder the marginalia layout, keeps it out of listings, RSS, backlinks and the sitemap, and adds `<meta name="robots" content="noindex">` so search engines don't index it. Front matter only needs `title`, `description` and `permalink`.

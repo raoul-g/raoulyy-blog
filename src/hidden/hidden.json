@@ -1,0 +1,5 @@
+{
+  "layout": "layouts/marginalia.njk",
+  "eleventyExcludeFromCollections": true,
+  "noindex": true
+}

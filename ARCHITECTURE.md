@@ -69,7 +69,7 @@ flowchart TB
     SRC --> JSONT["backlinks-index.json.11ty.js<br/><i>JS class template → JSON</i>"]
     SRC --> LAYOUTS["_includes/layouts/<br/>base · marginalia · fragment"]
     SRC --> DATA["_data/site.json<br/><i>global: title, description, url, image</i>"]
-    SRC --> CONTENT["fragments/NNN-*.md + fragments.json<br/>marginalia/*.md + marginalia.json<br/>hidden/*.md<br/><i>folder .json = defaults for every file inside</i>"]
+    SRC --> CONTENT["fragments/NNN-*.md + fragments.json<br/>marginalia/*.md + marginalia.json<br/>hidden/*.md + hidden.json<br/><i>folder .json = defaults for every file inside</i>"]
 ```
 
 ---
@@ -160,7 +160,7 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    BASE["<b>layouts/base.njk</b><br/>head: title, meta description, canonical,<br/>Open Graph + Twitter card, RSS link, style.css<br/>header: nav + theme toggle checkbox<br/>+ inline script restoring saved theme<br/><i>block content</i><br/>footer: year, RSS icon<br/>script: /js/main.js"]
+    BASE["<b>layouts/base.njk</b><br/>head: title, meta description, noindex (if set), canonical,<br/>Open Graph + Twitter card, RSS link, style.css<br/>header: nav + theme toggle checkbox<br/>+ inline script restoring saved theme<br/><i>block content</i><br/>footer: year, RSS icon<br/>script: /js/main.js"]
     MARG["<b>layouts/marginalia.njk</b><br/>wraps content in div.review-body"]
     FRAG["<b>layouts/fragment.njk</b><br/>finds own index in collections.fragments<br/>number = total − index<br/>prev / next links with tooltip<br/>Share Fragment button"]
 
@@ -184,7 +184,7 @@ flowchart TB
 | `/fragments.html` | `fragments.njk` | `collections.fragments` → number, title, description, date |
 | `/fragments/*.html` | `fragment.njk` layout | `collections.fragments` for numbering + prev/next |
 | `/marginalia/*.html` | `marginalia.njk` layout | post content |
-| `/hidden/*.html` | `marginalia.njk` layout | excluded from collections, so not listed, not in RSS, backlinks, or sitemap |
+| `/hidden/*.html` | `marginalia.njk` layout (via `hidden.json`) | excluded from collections, so not listed, not in RSS, backlinks, or sitemap; `noindex` meta tag |
 | `/rss.xml` | `rss.njk` | fragments + marginalia merged, sorted by date, full content with links made absolute (`renderTransforms` with `site.url`) |
 | `/backlinks-index.json` | `backlinks-index.json.11ty.js` | collections + **raw `.md` files from disk** |
 | `/backlinks.html` | `backlinks.njk` | shell only; filled in by `main.js` |
@@ -330,7 +330,6 @@ Fragment numbers (`#11`) aren't stored anywhere. They come from each fragment's 
 
 Found while analysing the project. None of them break the site, but they're good to know:
 
-- **Hidden pages aren't `noindex`.** They're kept out of the sitemap, but a search engine that finds a link to one can still index it. Add `<meta name="robots" content="noindex">` if they should stay truly unlisted.
 - **Two wikilink mechanisms:** the markdown-it plugin handles Markdown, and the HTML transform handles everything else (and re-checks link classes). The transform alone would be enough, but the plugin avoids regex-on-HTML for content.
 - **Backlink snippets come from raw Markdown**, so inline HTML or Markdown syntax next to a `[[term]]` can show up in the snippet text (it's escaped, so it's safe).
 - **`og:type`** is `article` only for URLs containing `marginalia`. Fragments get `website`.
