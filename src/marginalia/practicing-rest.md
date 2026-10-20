@@ -13,7 +13,7 @@ Rest in peace! I was very sad when I found out that Walter Brueggemann had died 
 
 This book is definitely not missing a certain prophetic dimension in that sense. It is a study of the concept of Sabbath in the Jewish tradition, its underlying principles and what applying them in today's world could look like.
 
-As most readers will know, at its most basic, Sabbath can be defined as a religious ritual in Judaism in which _"certain workaday activities and ordinary busyness are suspended and brought to a halt"_ once a week for a whole day. While Orthodox Jews are still living out this ritual in a quite radical way, according to the "letter", so to speak, Brueggemann insists more on the "spirit" of this law.
+As most readers will know, at its most basic, Sabbath can be defined as a [[religion|religious]] ritual in Judaism in which _"certain workaday activities and ordinary busyness are suspended and brought to a halt"_ once a week for a whole day. While Orthodox Jews are still living out this ritual in a quite radical way, according to the "letter", so to speak, Brueggemann insists more on the "spirit" of this law.
 
 Generally he understands it as a _"cultivation of inaction in body and spirit"_. Nowadays we are used to being on _"the initiating end of all things"_ - we want to always be in control. In contrast to this, during Sabbath rest, one _"tries to stand in the cycle of natural time, without manipulation or interference"_. From my personal experience I can say that this is a refreshing and needed exercise which always leaves my mind refreshed.
 
