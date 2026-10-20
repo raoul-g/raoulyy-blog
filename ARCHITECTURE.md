@@ -2,7 +2,7 @@
 
 How raoulyy.blog works technically, from writing Markdown to a page in someone's browser.
 
-**In one sentence:** Markdown and Nunjucks sources in `src/` are compiled by Eleventy 3 into `_site/`. A small set of Node scripts generates the sitemap and mirrors `_site/` into `docs/`, which is committed and served by GitHub Pages at `raoulyy.blog`. On the client, one vanilla JS file handles the theme toggle, sharing, analytics, and the backlinks search.
+**In one sentence:** Markdown and Nunjucks sources in `src/` are compiled by Eleventy 3 into `_site/`. On every push to `main`, a GitHub Actions workflow runs that build and publishes `_site/` to GitHub Pages at `raoulyy.blog`. On the client, one vanilla JS file handles the theme toggle, sharing, analytics, and the backlinks search.
 
 ---
 
@@ -14,20 +14,18 @@ flowchart LR
         MD["src/fragments/*.md<br/>src/marginalia/*.md<br/>src/hidden/*.md"]
         NJK["src/*.njk pages<br/>src/_includes/layouts/*.njk"]
         DATA["src/_data/site.json"]
-        STATIC["css/ · js/ · images/<br/>CNAME · robots.txt"]
+        STATIC["css/ · js/ · images/<br/>CNAME · robots.txt · sitemap.xml"]
+        SERVE["pnpm run serve<br/>localhost:8080"]
     end
 
-    subgraph Build["⚙️ Build (Node + pnpm)"]
-        ELEVENTY["Eleventy 3<br/>+ .eleventy.js config"]
-        SITE[("_site/<br/>(gitignored)")]
-        SITEMAP["tools/generate-sitemap.js"]
-        COPY["tools/copy-docs.js"]
-        DOCS[("docs/<br/>(committed)")]
+    subgraph CI["⚙️ GitHub Actions (.github/workflows/deploy.yml)"]
+        ELEVENTY["pnpm install + pnpm run build<br/>Eleventy 3 + .eleventy.js"]
+        SITE[("_site/<br/>(Pages artifact)")]
     end
 
     subgraph Host["☁️ Hosting"]
         GH["GitHub repo<br/>main branch"]
-        PAGES["GitHub Pages<br/>serves /docs<br/>CNAME → raoulyy.blog"]
+        PAGES["GitHub Pages<br/>CNAME → raoulyy.blog"]
     end
 
     subgraph Client["🌐 Browser"]
@@ -40,12 +38,10 @@ flowchart LR
         GOAT["GoatCounter<br/>raoulyy.goatcounter.com"]
     end
 
-    MD & NJK & DATA --> ELEVENTY
-    STATIC -- passthrough copy --> ELEVENTY
-    ELEVENTY --> SITE
-    SITE --> SITEMAP --> |"sitemap.xml (repo root)"| COPY
-    SITE --> COPY --> DOCS
-    DOCS -- git push --> GH --> PAGES
+    MD & NJK & DATA & STATIC -. "local preview" .-> SERVE
+    MD & NJK & DATA & STATIC -- git push --> GH
+    GH -- "push to main" --> ELEVENTY --> SITE
+    SITE -- "deploy-pages" --> PAGES
     PAGES --> HTML --> MAINJS
     HTML -. "@import / @font-face" .-> FONTS
     MAINJS -. "injects count.js" .-> GOAT
@@ -60,13 +56,13 @@ flowchart LR
 flowchart TB
     ROOT["raoulyy-blog/"]
 
+    ROOT --> WF[".github/workflows/deploy.yml<br/><i>build + publish to Pages</i>"]
     ROOT --> CFG[".eleventy.js<br/><i>markdown-it, wikilink plugin,<br/>collections, filters, transform</i>"]
     ROOT --> PKG["package.json · pnpm-lock.yaml<br/>pnpm-workspace.yaml<br/><i>scripts, Eleventy dep,<br/>3-day minimumReleaseAge</i>"]
     ROOT --> SRC["src/ <i>(Eleventy input)</i>"]
     ROOT --> ASSETS["css/style.css · js/main.js · images/<br/><i>passthrough assets</i>"]
-    ROOT --> TOOLS["tools/<br/><i>clean-site · clean-docs ·<br/>generate-sitemap · copy-docs</i>"]
+    ROOT --> TOOLS["tools/<br/><i>clean-site · generate-sitemap</i>"]
     ROOT --> OUT["_site/ <i>(build output, gitignored)</i>"]
-    ROOT --> DOCS["docs/ <i>(deployed copy of _site + .nojekyll)</i>"]
     ROOT --> ARCH["archive-old-html/<br/><i>pre-Eleventy hand-written HTML, unused</i>"]
     ROOT --> MISC["CNAME · robots.txt · sitemap.xml"]
 
@@ -81,43 +77,39 @@ flowchart TB
 
 ## 3. Build & deploy pipeline
 
-`pnpm run deploy` is the single command that produces a publishable site. npm-style `pre*` hooks run around the main scripts:
+Publishing is just `git push`. GitHub Actions builds the site from a clean checkout and hands `_site/` to GitHub Pages:
 
 ```mermaid
 sequenceDiagram
     autonumber
     actor Dev as Raoul
-    participant PNPM as pnpm
-    participant CD as tools/clean-docs.js
-    participant CS as tools/clean-site.js
-    participant E as Eleventy
-    participant SM as tools/generate-sitemap.js
-    participant CP as tools/copy-docs.js
-    participant GH as GitHub Pages
+    participant GH as GitHub (main)
+    participant B as Actions job "build"
+    participant D as Actions job "deploy"
+    participant P as GitHub Pages
 
-    Dev->>PNPM: pnpm run deploy
-    PNPM->>CD: predeploy
-    CD-->>CD: empty docs/ (keep .nojekyll)
-    PNPM->>PNPM: npm run build
-    PNPM->>CS: prebuild
-    CS-->>CS: rm -rf _site/
-    PNPM->>E: eleventy
-    E-->>E: render src/ → _site/<br/>passthrough css/ js/ images/ CNAME robots.txt sitemap.xml
-    PNPM->>SM: node tools/generate-sitemap.js
-    SM-->>SM: scan _site/**/*.html (skip _*, 404.html)<br/>write ./sitemap.xml (mtime → lastmod)
-    PNPM->>CP: node tools/copy-docs.js
-    CP-->>CP: clear docs/, copy _site/ → docs/<br/>overwrite docs/sitemap.xml with fresh root one<br/>write docs/.nojekyll
-    Dev->>GH: git add docs && commit && push
-    GH-->>GH: publish docs/ at https://raoulyy.blog
+    Dev->>GH: git push
+    GH->>B: trigger deploy.yml (push to main or manual run)
+    B-->>B: checkout · pnpm (version from packageManager) · Node 24
+    B-->>B: pnpm install --frozen-lockfile
+    B-->>B: pnpm run build<br/>prebuild: rm -rf _site/ → eleventy: src/ → _site/<br/>passthrough css/ js/ images/ CNAME robots.txt sitemap.xml
+    B->>D: upload _site/ as Pages artifact
+    D->>P: deploy-pages
+    P-->>Dev: live at https://raoulyy.blog (about 1 min after push)
+    Note over B,P: If the build fails, nothing is deployed<br/>and the previous version stays live.
 ```
 
-Other scripts:
+All actions in the workflow are pinned to commit SHAs. Two deploys never run at the same time (`concurrency: pages`).
+
+Local scripts:
 
 | Script | What it does |
 |---|---|
-| `pnpm run build` | `prebuild` (wipe `_site/`) → `eleventy` |
-| `pnpm run serve` | Eleventy dev server with live reload (no clean, no sitemap) |
+| `pnpm run build` | `prebuild` (wipe `_site/`) → `eleventy`, same as CI |
+| `pnpm run serve` | Eleventy dev server with live reload on `localhost:8080` |
 | `pnpm run watch` | Rebuild on change without a server |
+
+`sitemap.xml` lives in the repo root and is copied into the build as-is. Regenerate it with `pnpm run build && node tools/generate-sitemap.js` and commit the result.
 
 ---
 
@@ -338,10 +330,8 @@ Fragment numbers (`#11`) aren't stored anywhere. They come from each fragment's 
 Found while analysing the project. None of them break the site, but they're good to know:
 
 - **Hidden page is in the sitemap.** `generate-sitemap.js` scans every `.html` in `_site/`, so `/hidden/dezbracarea-unui-suflet.html` is listed in `sitemap.xml` and can be found by search engines. Add `hidden` to the skip list if that isn't intended.
-- **`_site/sitemap.xml` is one deploy behind.** Eleventy passthrough-copies the *old* root `sitemap.xml` before the new one is generated. `copy-docs.js` then overwrites `docs/sitemap.xml` with the fresh one, so production is correct.
-- **`deploy` calls `npm run build`** even though the project now uses pnpm. It works, but `pnpm run build` would be consistent.
+- **`sitemap.xml` is maintained by hand.** It's a committed file regenerated with a separate script, so it goes stale if you forget to rerun it after adding a post.
 - **Dead passthrough entries:** `assets` and `404.html` don't exist at the root (the 404 page comes from `src/404.njk`).
-- **Redundant cleaning:** `copy-docs.js` clears `docs/` itself, so `predeploy` (`clean-docs.js`) does the same work again.
 - **Two wikilink mechanisms:** the markdown-it plugin handles Markdown, and the HTML transform handles everything else (and re-checks link classes). The transform alone would be enough, but the plugin avoids regex-on-HTML for content.
 - **Backlink snippets come from raw Markdown**, so inline HTML or Markdown syntax next to a `[[term]]` can show up in the snippet text (it's escaped, so it's safe).
 - **Theme flash:** `main.js` runs at the end of `<body>`, so a returning visitor with the override set may briefly see the OS theme before the checkbox is restored.

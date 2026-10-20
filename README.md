@@ -24,12 +24,6 @@ Build the site:
 pnpm run build
 ```
 
-Build the site, regenerate the sitemap, and update `docs/` for GitHub Pages:
-
-```bash
-pnpm run deploy
-```
-
 Run a local server with live reload:
 
 ```bash
@@ -132,38 +126,28 @@ pnpm run serve
 
 - The old static HTML files have been moved out of the root so the site works as a clean Eleventy project.
 - Output is generated into `_site/`, which is ignored by Git.
-- The deployed GitHub Pages site is served from `docs/`, which contains the static build output copied from `_site/`.
-- `docs/.nojekyll` is present so GitHub Pages will serve the files directly and will not try to build with Jekyll.
 
-## GitHub Pages deploy workflow
+## Deploying
 
-1. Build the site, regenerate the sitemap, and update `docs/` in one command:
+The site is deployed to GitHub Pages by GitHub Actions (`.github/workflows/deploy.yml`). Every push to `main` installs dependencies, runs `pnpm run build`, and publishes `_site/`. There is nothing to build or commit by hand:
 
 ```bash
-pnpm run deploy
-```
-
-2. Commit and push the generated `docs/` output:
-
-```bash
-git add docs/.nojekyll docs
-git commit -m "Update deployed site"
+git add src/fragments/012-my-new-fragment.md
+git commit -m "publish new fragment (12)"
 git push
 ```
 
-3. Confirm your repository Pages settings are configured to publish from the `docs/` folder.
+Progress and errors show up in the repository's **Actions** tab. A failed build leaves the live site on the last successful version. A deploy can also be started manually there via **Run workflow**.
 
-4. Every time you update content or templates, repeat the build/copy/commit/push workflow.
+The repository's Pages settings must have **Source: GitHub Actions** (Settings → Pages).
 
 ## Sitemap
 
-To re-generate the sitemap if needed:
+`sitemap.xml` in the repo root is copied into the build unchanged. To re-generate it after adding or removing pages, build first and then commit the result:
 
 ```bash
-node ./tools/generate-sitemap.js
+pnpm run build && node ./tools/generate-sitemap.js
 ```
-
-The deploy command also regenerates the sitemap and copies it into `docs/`.
 
 ### Eleventy
 
