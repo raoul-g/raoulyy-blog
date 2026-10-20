@@ -21,7 +21,7 @@ The life of Barabbas, as depicted in this novel, is often understood to be refle
 
 While Barabbas is haunted by his past, the Christians have found peace with their past and certainty for a glorious future.
 
-To read this as a simple polemic for [[Christianity]] would be shortsighted. Lagerkvist does not depict Barabbas as a man who simply chooses not to believe in Jesus - he depicts him as _unable_ to believe. He wants to believe but cannot. The modern man is confronted by [[Nietzsche]]'s famous _"God is dead"_. For some this might mean the disappearance into insignificance of the God of the gaps, which get fewer and smaller as scientific progress advances. For others this is a signifier of the utter impossibility of a God after Auschwitz and other horrors.
+To read this as a simple polemic for [[Christianity]] would be shortsighted. Lagerkvist does not depict Barabbas as a man who simply chooses not to believe in Jesus - he depicts him as _unable_ to believe. He wants to believe but cannot. The modern man is confronted by [[Friedrich Nietzsche|Nietzsche]]'s famous _"God is dead"_. For some this might mean the disappearance into insignificance of the God of the gaps, which get fewer and smaller as scientific progress advances. For others this is a signifier of the utter impossibility of a God after Auschwitz and other horrors.
 
 This _"God is dead"_ is experienced by more and more people, be it intellectually, be it emotionally or spiritually.
 

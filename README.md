@@ -137,6 +137,7 @@ Studies have shown that [[willpower]] is a limited resource.
 - Once a topic appears in **at least two posts**, every `[[…]]` mention of it becomes a link to its page at `/topics/<topic>.html`, and it's listed on `/topics.html`.
 - Until then it renders as plain text. You can mark topics freely: they turn into links on their own once another post picks them up.
 - Capitalization doesn't matter: `[[Willpower]]` and `[[willpower]]` are the same topic.
+- People are topics under their full name, e.g. `[[Friedrich Nietzsche|Nietzsche]]`, with well-known exceptions like `[[Jesus]]`.
 - To link a word that isn't spelled exactly like the topic, write `[[topic|text]]`: the post shows *text*, but it counts toward *topic*. For example, `[[story|stories]]` or `[[Buddhism|the Buddha]]` (same order as in Obsidian).
 - Posts that share topics with other posts end with a "Connected posts" box listing those posts (`src/_includes/connected.njk`).
 
