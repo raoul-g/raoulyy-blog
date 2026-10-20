@@ -143,10 +143,10 @@ The repository's Pages settings must have **Source: GitHub Actions** (Settings â
 
 ## Sitemap
 
-`sitemap.xml` in the repo root is copied into the build unchanged. To re-generate it after adding or removing pages, build first and then commit the result:
+`sitemap.xml` is generated on every build from `src/sitemap.njk` and lists every page in `collections.all`. To keep a page out of the sitemap (as is done for `404.njk` and the `hidden/` page), add this to its front matter:
 
-```bash
-pnpm run build && node ./tools/generate-sitemap.js
+```yaml
+eleventyExcludeFromCollections: true
 ```
 
 ### Eleventy

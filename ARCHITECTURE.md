@@ -14,7 +14,7 @@ flowchart LR
         MD["src/fragments/*.md<br/>src/marginalia/*.md<br/>src/hidden/*.md"]
         NJK["src/*.njk pages<br/>src/_includes/layouts/*.njk"]
         DATA["src/_data/site.json"]
-        STATIC["css/ · js/ · images/<br/>CNAME · robots.txt · sitemap.xml"]
+        STATIC["css/ · js/ · images/<br/>CNAME · robots.txt"]
         SERVE["pnpm run serve<br/>localhost:8080"]
     end
 
@@ -61,12 +61,12 @@ flowchart TB
     ROOT --> PKG["package.json · pnpm-lock.yaml<br/>pnpm-workspace.yaml<br/><i>scripts, Eleventy dep,<br/>3-day minimumReleaseAge</i>"]
     ROOT --> SRC["src/ <i>(Eleventy input)</i>"]
     ROOT --> ASSETS["css/style.css · js/main.js · images/<br/><i>passthrough assets</i>"]
-    ROOT --> TOOLS["tools/<br/><i>clean-site · generate-sitemap</i>"]
+    ROOT --> TOOLS["tools/clean-site.js<br/><i>wipes _site/ before each build</i>"]
     ROOT --> OUT["_site/ <i>(build output, gitignored)</i>"]
     ROOT --> ARCH["archive-old-html/<br/><i>pre-Eleventy hand-written HTML, unused</i>"]
-    ROOT --> MISC["CNAME · robots.txt · sitemap.xml"]
+    ROOT --> MISC["CNAME · robots.txt"]
 
-    SRC --> PAGES_["index.njk · marginalia.njk · fragments.njk<br/>backlinks.njk · 404.njk · rss.njk"]
+    SRC --> PAGES_["index.njk · marginalia.njk · fragments.njk<br/>backlinks.njk · 404.njk<br/>rss.njk · sitemap.njk"]
     SRC --> JSONT["backlinks-index.json.11ty.js<br/><i>JS class template → JSON</i>"]
     SRC --> LAYOUTS["_includes/layouts/<br/>base · marginalia · fragment"]
     SRC --> DATA["_data/site.json<br/><i>global: title, description, url, image</i>"]
@@ -92,7 +92,7 @@ sequenceDiagram
     GH->>B: trigger deploy.yml (push to main or manual run)
     B-->>B: checkout · pnpm (version from packageManager) · Node 24
     B-->>B: pnpm install --frozen-lockfile
-    B-->>B: pnpm run build<br/>prebuild: rm -rf _site/ → eleventy: src/ → _site/<br/>passthrough css/ js/ images/ CNAME robots.txt sitemap.xml
+    B-->>B: pnpm run build<br/>prebuild: rm -rf _site/ → eleventy: src/ → _site/<br/>passthrough css/ js/ images/ CNAME robots.txt
     B->>D: upload _site/ as Pages artifact
     D->>P: deploy-pages
     P-->>Dev: live at https://raoulyy.blog (about 1 min after push)
@@ -109,8 +109,6 @@ Local scripts:
 | `pnpm run serve` | Eleventy dev server with live reload on `localhost:8080` |
 | `pnpm run watch` | Rebuild on change without a server |
 
-`sitemap.xml` lives in the repo root and is copied into the build as-is. Regenerate it with `pnpm run build && node tools/generate-sitemap.js` and commit the result.
-
 ---
 
 ## 4. Inside the Eleventy build
@@ -123,7 +121,7 @@ flowchart TB
         COLL["Collections<br/>marginalia = src/marginalia/*.md<br/>fragments = src/fragments/*.md<br/>(both sorted newest first)"]
         FILT["Filters<br/>htmlDate · readableDate · rfc822Date"]
         XFORM["Transform 'wikilinks' (*.html)<br/>catch leftover [[term]] in non-Markdown output<br/>+ ensure backlink-inline class"]
-        PT["Passthrough copy<br/>css · js · images · CNAME<br/>robots.txt · sitemap.xml"]
+        PT["Passthrough copy<br/>css · js · images · CNAME<br/>robots.txt"]
         MDLIB --- WLP
     end
 
@@ -142,6 +140,7 @@ flowchart TB
         O5["backlinks.html"]
         O6["backlinks-index.json"]
         O7["rss.xml"]
+        O8["sitemap.xml"]
     end
 
     CM --> MDLIB --> LAYOUT["Nunjucks layouts"]
@@ -153,7 +152,7 @@ flowchart TB
     FILT --> LAYOUT
     LAYOUT --> XFORM
     XFORM --> O1 & O2 & O3 & O4 & O5
-    PG --> O7
+    PG --> O7 & O8
     BJ --> O6
 ```
 
@@ -174,7 +173,7 @@ flowchart TB
     PAGES["index · marginalia · fragments<br/>backlinks · 404 (.njk)"] -. layout .-> BASE
 ```
 
-`rss.njk` and `backlinks-index.json.11ty.js` render without a layout and are excluded from collections.
+`rss.njk`, `sitemap.njk` and `backlinks-index.json.11ty.js` render without a layout and are excluded from collections.
 
 ### Which page reads which data
 
@@ -185,10 +184,11 @@ flowchart TB
 | `/fragments.html` | `fragments.njk` | `collections.fragments` → number, title, description, date |
 | `/fragments/*.html` | `fragment.njk` layout | `collections.fragments` for numbering + prev/next |
 | `/marginalia/*.html` | `marginalia.njk` layout | post content |
-| `/hidden/*.html` | `marginalia.njk` layout | not in any collection, so not listed, not in RSS, not in backlinks |
+| `/hidden/*.html` | `marginalia.njk` layout | excluded from collections, so not listed, not in RSS, backlinks, or sitemap |
 | `/rss.xml` | `rss.njk` | fragments + marginalia merged, sorted by date, full `templateContent` |
 | `/backlinks-index.json` | `backlinks-index.json.11ty.js` | collections + **raw `.md` files from disk** |
 | `/backlinks.html` | `backlinks.njk` | shell only; filled in by `main.js` |
+| `/sitemap.xml` | `sitemap.njk` | `collections.all`, so every page except those with `eleventyExcludeFromCollections` (404, hidden, rss, backlinks index) |
 
 ---
 
@@ -329,8 +329,7 @@ Fragment numbers (`#11`) aren't stored anywhere. They come from each fragment's 
 
 Found while analysing the project. None of them break the site, but they're good to know:
 
-- **Hidden page is in the sitemap.** `generate-sitemap.js` scans every `.html` in `_site/`, so `/hidden/dezbracarea-unui-suflet.html` is listed in `sitemap.xml` and can be found by search engines. Add `hidden` to the skip list if that isn't intended.
-- **`sitemap.xml` is maintained by hand.** It's a committed file regenerated with a separate script, so it goes stale if you forget to rerun it after adding a post.
+- **Hidden pages aren't `noindex`.** They're kept out of the sitemap, but a search engine that finds a link to one can still index it. Add `<meta name="robots" content="noindex">` if they should stay truly unlisted.
 - **Dead passthrough entries:** `assets` and `404.html` don't exist at the root (the 404 page comes from `src/404.njk`).
 - **Two wikilink mechanisms:** the markdown-it plugin handles Markdown, and the HTML transform handles everything else (and re-checks link classes). The transform alone would be enough, but the plugin avoids regex-on-HTML for content.
 - **Backlink snippets come from raw Markdown**, so inline HTML or Markdown syntax next to a `[[term]]` can show up in the snippet text (it's escaped, so it's safe).

@@ -3,6 +3,7 @@ layout: layouts/marginalia.njk
 title: Dezbrăcarea unui suflet
 description: Oricît de lentă, dezbrăcarea unui trup ajunge de îndată la limită și limita e trupul gol însuși...
 permalink: "/hidden/dezbracarea-unui-suflet.html"
+eleventyExcludeFromCollections: true
 ---
 
 `Mesaj pentru nuntă 08.08.2021 (Daniela & Alex)`

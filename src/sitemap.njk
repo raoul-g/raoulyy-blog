@@ -1,0 +1,15 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for item in collections.all %}
+  {%- set isHome = item.url == "/index.html" %}
+  <url>
+    <loc>{{ site.url }}{% if isHome %}/{% else %}{{ item.url }}{% endif %}</loc>
+    <lastmod>{{ item.date | htmlDate }}</lastmod>
+    <priority>{% if isHome %}1.0{% else %}0.8{% endif %}</priority>
+  </url>
+{%- endfor %}
+</urlset>
