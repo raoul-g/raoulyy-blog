@@ -2,7 +2,7 @@
 
 How raoulyy.blog works technically, from writing Markdown to a page in someone's browser.
 
-**In one sentence:** Markdown and Nunjucks sources in `src/` are compiled by Eleventy 3 into `_site/`. On every push to `main`, a GitHub Actions workflow runs that build and publishes `_site/` to GitHub Pages at `raoulyy.blog`. On the client, one vanilla JS file handles the theme toggle, sharing, analytics, and the backlinks search.
+**In one sentence:** Markdown and Nunjucks sources in `src/` are compiled by Eleventy 3 into `_site/`. On every push to `main`, a GitHub Actions workflow runs that build and publishes `_site/` to GitHub Pages at `raoulyy.blog`. On the client, one small vanilla JS file handles the theme toggle, sharing and analytics. Everything else, including the topic pages, is plain static HTML.
 
 ---
 
@@ -43,7 +43,6 @@ flowchart LR
     SITE -- "deploy-pages" --> PAGES
     PAGES --> HTML --> MAINJS
     MAINJS -. "injects count.js" .-> GOAT
-    MAINJS -. "fetch /backlinks-index.json" .-> PAGES
 ```
 
 ---
@@ -55,7 +54,7 @@ flowchart TB
     ROOT["raoulyy-blog/"]
 
     ROOT --> WF[".github/workflows/deploy.yml<br/><i>build + publish to Pages</i>"]
-    ROOT --> CFG[".eleventy.js<br/><i>markdown-it, wikilink plugin, RSS plugin,<br/>collections, filters, transform</i>"]
+    ROOT --> CFG[".eleventy.js<br/><i>markdown options, RSS plugin, collections<br/>(incl. topics), filters, wikilinks transform</i>"]
     ROOT --> PKG["package.json · pnpm-lock.yaml<br/>pnpm-workspace.yaml<br/><i>scripts, Eleventy dep,<br/>3-day minimumReleaseAge</i>"]
     ROOT --> SRC["src/ <i>(Eleventy input)</i>"]
     ROOT --> ASSETS["css/style.css · css/fonts/ · js/main.js · images/<br/><i>passthrough assets</i>"]
@@ -63,8 +62,8 @@ flowchart TB
     ROOT --> OUT["_site/ <i>(build output, gitignored)</i>"]
     ROOT --> MISC["CNAME · robots.txt"]
 
-    SRC --> PAGES_["index.njk · marginalia.njk · fragments.njk<br/>backlinks.njk · 404.njk<br/>rss.njk · sitemap.njk"]
-    SRC --> JSONT["backlinks-index.json.11ty.js<br/><i>JS class template → JSON</i>"]
+    SRC --> PAGES_["index.njk · marginalia.njk · fragments.njk<br/>topics.njk · topic.njk · 404.njk<br/>rss.njk · sitemap.njk · backlinks.njk (redirect)"]
+    ROOT --> LIB["lib/topics.js<br/><i>topic index from [[term]]s,<br/>snippets, link rendering</i>"]
     SRC --> LAYOUTS["_includes/layouts/<br/>base · marginalia · fragment"]
     SRC --> DATA["_data/site.json<br/><i>global: title, description, url, image</i>"]
     SRC --> CONTENT["fragments/NNN-*.md + fragments.json<br/>marginalia/*.md + marginalia.json<br/>hidden/*.md + hidden.json<br/><i>folder .json = defaults for every file inside</i>"]
@@ -112,20 +111,18 @@ Local scripts:
 ```mermaid
 flowchart TB
     subgraph Config[".eleventy.js"]
-        MDLIB["markdown-it<br/>html · linkify · typographer"]
-        WLP["wikilinkPlugin<br/>core rule after 'inline':<br/>[[term]] → &lt;a class=backlink-inline&gt;"]
+        MDLIB["markdown-it (Eleventy's)<br/>+ linkify · typographer"]
         COLL["Collections<br/>marginalia = src/marginalia/*.md<br/>fragments = src/fragments/*.md<br/>(both sorted newest first)"]
-        FILT["Filters<br/>htmlDate · readableDate"]
+        TOP["Collection 'topics'<br/>lib/topics.js over rawInput of all posts<br/>only topics in ≥ 2 posts"]
+        FILT["Filters<br/>htmlDate · readableDate<br/>wikilinks · topicRedirects"]
         RSSP["@11ty/eleventy-plugin-rss<br/>dateToRfc822 · getNewestCollectionItemDate<br/>+ HTML base plugin (renderTransforms)"]
-        XFORM["Transform 'wikilinks' (*.html)<br/>catch leftover [[term]] in non-Markdown output<br/>+ ensure backlink-inline class"]
+        XFORM["Transform 'wikilinks' (*.html)<br/>[[term]] → link to /topics/slug.html<br/>or plain text if the topic has no page"]
         PT["Passthrough copy<br/>css · js · images · CNAME<br/>robots.txt"]
-        MDLIB --- WLP
     end
 
     subgraph Inputs["src/"]
         CM["Content .md<br/>(front matter: title, description,<br/>date, permalink, book)"]
         PG["Pages .njk"]
-        BJ["backlinks-index.json.11ty.js"]
         SJ["_data/site.json"]
     end
 
@@ -134,8 +131,8 @@ flowchart TB
         O2["marginalia.html + marginalia/*.html"]
         O3["fragments.html + fragments/*.html"]
         O4["hidden/*.html"]
-        O5["backlinks.html"]
-        O6["backlinks-index.json"]
+        O5["topics.html + topics/*.html"]
+        O6["backlinks.html (redirect)"]
         O7["rss.xml"]
         O8["sitemap.xml"]
     end
@@ -145,13 +142,14 @@ flowchart TB
     SJ --> LAYOUT
     PG --> LAYOUT
     COLL --> PG
-    COLL --> BJ
+    CM --> TOP --> PG
+    TOP -. "linkable topics" .-> XFORM
     FILT --> LAYOUT
     LAYOUT --> XFORM
     XFORM --> O1 & O2 & O3 & O4 & O5
     PG --> O7 & O8
     RSSP --> O7
-    BJ --> O6
+    PG --> O6
 ```
 
 ### Template inheritance
@@ -168,10 +166,10 @@ flowchart TB
     MP["src/marginalia/*.md"] -. layout .-> MARG
     HP["src/hidden/*.md"] -. layout .-> MARG
     FP["src/fragments/NNN-*.md"] -. layout .-> FRAG
-    PAGES["index · marginalia · fragments<br/>backlinks · 404 (.njk)"] -. layout .-> BASE
+    PAGES["index · marginalia · fragments<br/>topics · topic · 404 (.njk)"] -. layout .-> BASE
 ```
 
-`rss.njk`, `sitemap.njk` and `backlinks-index.json.11ty.js` render without a layout and are excluded from collections.
+`rss.njk`, `sitemap.njk` and `backlinks.njk` render without a layout and are excluded from collections.
 
 ### Which page reads which data
 
@@ -182,57 +180,46 @@ flowchart TB
 | `/fragments.html` | `fragments.njk` | `collections.fragments` → number, title, description, date |
 | `/fragments/*.html` | `fragment.njk` layout | `collections.fragments` for numbering + prev/next |
 | `/marginalia/*.html` | `marginalia.njk` layout | post content |
-| `/hidden/*.html` | `marginalia.njk` layout (via `hidden.json`) | excluded from collections, so not listed, not in RSS, backlinks, or sitemap; `noindex` meta tag |
-| `/rss.xml` | `rss.njk` | fragments + marginalia merged, sorted by date, full content with links made absolute (`renderTransforms` with `site.url`) |
-| `/backlinks-index.json` | `backlinks-index.json.11ty.js` | collections + **raw `.md` files from disk** |
-| `/backlinks.html` | `backlinks.njk` | shell only; filled in by `main.js` |
-| `/sitemap.xml` | `sitemap.njk` | `collections.all`, so every page except those with `eleventyExcludeFromCollections` (404, hidden, rss, backlinks index) |
+| `/hidden/*.html` | `marginalia.njk` layout (via `hidden.json`) | excluded from collections, so not listed, not in RSS, topics, or sitemap; `noindex` meta tag |
+| `/rss.xml` | `rss.njk` | fragments + marginalia merged, sorted by date, full content through `wikilinks` and then `renderTransforms` with `site.url` (absolute links) |
+| `/topics.html` | `topics.njk` | `collections.topics` → term, number of posts |
+| `/topics/<slug>.html` | `topic.njk` (pagination, one page per topic) | one topic's mentions: post title, snippet sentence, kind, date |
+| `/backlinks.html` | `backlinks.njk` | redirect for old links: `?term=…` → matching topic page, else `/topics.html` |
+| `/sitemap.xml` | `sitemap.njk` | `collections.all`, so every page except those with `eleventyExcludeFromCollections` (404, hidden, rss, backlinks redirect); includes all topic pages |
 
 ---
 
-## 5. Wikilinks & backlinks
+## 5. Topics (wikilinks)
 
-The blog's "digital garden" feature. Writing `[[willpower]]` in a post does two things:
+Writing `[[willpower]]` in a fragment or marginalia post marks *willpower* as a topic. Everything happens at build time, so no JavaScript is involved:
 
-1. **At render time** it turns into a link: `<a href="/backlinks.html?term=willpower" class="backlink-inline">willpower</a>`.
-2. **At build time** it gets indexed into `backlinks-index.json` together with a short text snippet around it.
-
-The backlinks page then works entirely in the browser.
+- **A topic gets a page once it connects at least two posts** (`MIN_POSTS` in `lib/topics.js`). Only then do its `[[…]]` mentions become links. Topics used in a single post render as plain text, but they stay indexed and turn into links automatically when a second post mentions them.
+- **Each topic page** (`/topics/<slug>.html`) lists every post that mentions the topic, newest first. Each card shows the sentence the term appears in, with the term highlighted.
+- **Spelling variants share one topic.** Topics are keyed by slug, so `[[Willpower]]` and `[[willpower]]` are the same topic. The lowercase spelling is shown unless every mention is capitalized (e.g. *God*, *Paul Tillich*).
 
 ```mermaid
-sequenceDiagram
-    autonumber
-    participant MD as src/fragments/011-tied-to-the-mast.md
-    participant MDI as markdown-it + wikilinkPlugin
-    participant TR as HTML transform "wikilinks"
-    participant IDX as backlinks-index.json.11ty.js
-    participant JSON as /backlinks-index.json
-    participant U as Reader
-    participant JS as main.js · initBacklinksPage()
-
-    rect rgba(250,175,80,0.12)
-    Note over MD,JSON: Build time (Eleventy)
-    MD->>MDI: "...that [[willpower]] is a limited resource..."
-    MDI->>TR: link to /backlinks.html?term=willpower (class backlink-inline)
-    TR-->>TR: also converts raw [[...]] in .njk output<br/>(e.g. the [[love]] example on backlinks.njk)
-    IDX->>MD: fs.readFileSync, strip front matter
-    IDX-->>IDX: regex [[...]], key = lowercase(term)<br/>snippet = 40 chars before … 60 after<br/>dedupe mentions per URL
-    IDX->>JSON: { "willpower": { term, mentions[{title,url,collection,date,snippet}] },<br/>  "_terms": [{term,count}] sorted by count }
+flowchart TB
+    subgraph Build["Build time (Eleventy)"]
+        POSTS["src/fragments/*.md · src/marginalia/*.md<br/>'…that [[willpower]] is a limited resource…'"]
+        IDX["lib/topics.js · buildIndex()<br/>reads each post's rawInput<br/>splits into sentences (Intl.Segmenter)<br/>groups [[term]]s by slug"]
+        COLLT["collections.topics<br/>topics in ≥ 2 posts,<br/>most connected first"]
+        XF["wikilinks transform (every .html page)<br/>linkable → &lt;a class=topic-link href=/topics/slug.html&gt;<br/>otherwise → plain text"]
+        TPL["topic.njk (pagination)<br/>→ /topics/&lt;slug&gt;.html"]
+        LIST["topics.njk<br/>→ /topics.html"]
+        FEED["rss.njk<br/>content | wikilinks | renderTransforms<br/>→ absolute topic links"]
+        REDIR["backlinks.njk<br/>→ /backlinks.html redirect"]
     end
 
-    rect rgba(137,107,48,0.12)
-    Note over U,JS: Run time (browser)
-    U->>JS: click "willpower" link → /backlinks.html?term=willpower
-    JS->>JSON: fetch('/backlinks-index.json')
-    JSON-->>JS: full index
-    JS-->>U: renderTags(): top 40 _terms as buttons
-    JS-->>U: renderResults("willpower"): list of mentions + snippets
-    U->>JS: submit search / click a tag
-    JS-->>U: re-render + history.replaceState(?term=…)
-    end
+    POSTS --> IDX --> COLLT
+    COLLT --> TPL & LIST & REDIR
+    IDX -. "which topics are linkable" .-> XF
+    POSTS --> XF
+    POSTS --> FEED
 ```
 
-Terms are case-insensitive (`[[Willpower]]` and `[[willpower]]` share one entry). Only `src/fragments/` and `src/marginalia/` are indexed.
+The index is rebuilt on every build inside the `topics` collection. Eleventy builds collections before rendering any page, so the transform and the filters always see the current index.
+
+Old `/backlinks.html?term=…` links still work. They exist in feed readers and anywhere someone copied them. The redirect page maps every spelling of a linkable topic to its page, and sends anything else to `/topics.html`.
 
 ---
 
@@ -252,11 +239,7 @@ flowchart TD
     S -- yes --> S2["on click: navigator.share()<br/>fallback → clipboard.writeText(url)"]
     S -- no --> G
     S2 --> G["inject GoatCounter count.js<br/>(async, gc.zgo.at)"]
-    G --> B{"backlinks form +<br/>containers present?"}
-    B -- no --> END(["done"])
-    B -- yes --> F["fetch /backlinks-index.json"]
-    F -- error --> ERR["show 'Unable to load backlinks index.'"]
-    F -- ok --> R["render tags · read ?term=<br/>render results or welcome card<br/>wire submit + tag clicks"]
+    G --> END(["done"])
 ```
 
 ### Theme toggle: CSS only, JS just remembers the choice
@@ -293,13 +276,14 @@ Design tokens (`--bg-color`, `--text-main`, `--accent`, `--text-highlight`, …)
 flowchart LR
     HOME["/ (index.html)"] --> MAR["/marginalia.html"]
     HOME --> FRA["/fragments.html"]
-    NAV(("nav on<br/>every page")) --> MAR & FRA & BL["/backlinks.html?term="]
+    NAV(("nav on<br/>every page")) --> MAR & FRA & TOPS["/topics.html"]
     MAR --> MP["/marginalia/&lt;slug&gt;.html<br/>6 book reflections"]
     FRA --> FP["/fragments/&lt;slug&gt;.html<br/>11 mini-essays, #1…#11"]
     FP -->|prev / next| FP
-    MP & FP -- "[[term]] links" --> BL
-    BL -. "fetch" .-> IDX["/backlinks-index.json"]
-    BL -- "result links" --> MP & FP
+    TOPS --> TP["/topics/&lt;slug&gt;.html<br/>one per topic in ≥ 2 posts"]
+    MP & FP -- "[[term]] links" --> TP
+    TP -- "mention cards" --> MP & FP
+    OLD["/backlinks.html?term=…<br/>(old links)"] -. "redirect" .-> TP
     FOOT(("footer")) --> RSS["/rss.xml"]
     HID["/hidden/&lt;slug&gt;.html<br/>unlisted, direct link only"]
     SEO["/sitemap.xml · /robots.txt"]
@@ -313,7 +297,7 @@ flowchart LR
 | Field | Marginalia | Fragments | Used by |
 |---|:-:|:-:|---|
 | `layout` | `layouts/marginalia.njk` (set by `marginalia.json`) | `layouts/fragment.njk` (set by `fragments.json`) | Eleventy |
-| `title` | ✓ | ✓ | `<title>`, OG/Twitter, listings, RSS, backlinks |
+| `title` | ✓ | ✓ | `<title>`, OG/Twitter, listings, RSS, topic pages |
 | `description` | ✓ | ✓ | meta description, fragment card subtitle, RSS `<description>` |
 | `date` | ✓ | ✓ | sort order, numbering, `<time>`, RSS `pubDate` |
 | `permalink` | ✓ | ✓ | output URL (file names like `011-…` don't affect the URL) |
@@ -327,7 +311,6 @@ Fragment numbers (`#11`) aren't stored anywhere. They come from each fragment's 
 
 Found while analysing the project. None of them break the site, but they're good to know:
 
-- **Two wikilink mechanisms:** the markdown-it plugin handles Markdown, and the HTML transform handles everything else (and re-checks link classes). The transform alone would be enough, but the plugin avoids regex-on-HTML for content.
-- **Backlink snippets come from raw Markdown**, so inline HTML or Markdown syntax next to a `[[term]]` can show up in the snippet text (it's escaped, so it's safe).
+- **Topic snippets come from raw Markdown** with tags and basic Markdown syntax stripped (`lib/topics.js`). Unusual syntax next to a `[[term]]` (e.g. footnotes) could still show up in the snippet text. It's escaped, so it's safe.
 - **`og:type`** is `article` only for URLs containing `marginalia`. Fragments get `website`.
 - **`src/404.njk`** nests its own `<main>` inside the layout's `<main>`.

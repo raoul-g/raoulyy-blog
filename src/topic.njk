@@ -1,0 +1,27 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.topics
+  size: 1
+  alias: topic
+  addAllPagesToCollections: true
+permalink: "/topics/{{ topic.slug }}.html"
+eleventyComputed:
+  title: "{{ topic.term }}"
+  description: "Fragments and marginalia that mention {{ topic.term }}."
+---
+<p class="secondary topic-breadcrumb"><a href="/topics.html">← all topics</a></p>
+<h1>{{ topic.term }}</h1>
+<p class="secondary">: mentioned in {{ topic.mentions | length }} posts.</p>
+<br>
+<section aria-label="Posts mentioning {{ topic.term }}">
+{%- for mention in topic.mentions %}
+<a href="{{ mention.url }}" class="fragment-card-link">
+<article class="fragment-card topic-mention">
+  <h3>{{ mention.title }}</h3>
+  <p class="subtitle">{{ mention.snippet.before | escape }}<mark>{{ mention.snippet.match | escape }}</mark>{{ mention.snippet.after | escape }}</p>
+  <time datetime="{{ mention.date | htmlDate }}">{{ mention.kind }} · {{ mention.date | readableDate }}</time>
+</article>
+</a>
+{%- endfor %}
+</section>

@@ -1,65 +1,8 @@
-const markdownIt = require("markdown-it");
 const { rssPlugin } = require("@11ty/eleventy-plugin-rss");
-
-function wikilinkPlugin(md) {
-  function replaceWikilinks(state) {
-    const regex = /\[\[([^\]]+?)\]\]/g;
-
-    state.tokens.forEach((token) => {
-      if (token.type !== "inline" || !token.children) return;
-
-      const newChildren = [];
-      token.children.forEach((child) => {
-        if (child.type !== "text") {
-          newChildren.push(child);
-          return;
-        }
-
-        let text = child.content;
-        let lastIndex = 0;
-        let match;
-
-        while ((match = regex.exec(text)) !== null) {
-          if (match.index > lastIndex) {
-            const textToken = new state.Token("text", "", 0);
-            textToken.content = text.slice(lastIndex, match.index);
-            newChildren.push(textToken);
-          }
-
-          const term = match[1].trim();
-          const openToken = new state.Token("link_open", "a", 1);
-          openToken.attrs = [
-            ["href", "/backlinks.html?term=" + encodeURIComponent(term)],
-            ["class", "backlink-inline"]
-          ];
-          const textToken = new state.Token("text", "", 0);
-          textToken.content = term;
-          const closeToken = new state.Token("link_close", "a", -1);
-
-          newChildren.push(openToken, textToken, closeToken);
-          lastIndex = match.index + match[0].length;
-        }
-
-        if (lastIndex < text.length) {
-          const textToken = new state.Token("text", "", 0);
-          textToken.content = text.slice(lastIndex);
-          newChildren.push(textToken);
-        }
-      });
-
-      if (newChildren.length) {
-        token.children = newChildren;
-      }
-    });
-  }
-
-  md.core.ruler.after("inline", "wikilinks", replaceWikilinks);
-}
+const topics = require("./lib/topics");
 
 module.exports = function(eleventyConfig) {
-  const markdownLib = markdownIt({ html: true, linkify: true, typographer: true });
-  markdownLib.use(wikilinkPlugin);
-  eleventyConfig.setLibrary("md", markdownLib);
+  eleventyConfig.amendLibrary("md", (md) => md.set({ linkify: true, typographer: true }));
 
   // Feed date filters + absolute URLs in feed content (see src/rss.njk)
   eleventyConfig.addPlugin(rssPlugin);
@@ -82,6 +25,21 @@ module.exports = function(eleventyConfig) {
       .sort((a, b) => b.date - a.date);
   });
 
+  // Topics from [[term]]s in posts (see lib/topics.js). Rebuilt on every build; the filters and the
+  // wikilinks transform below read the latest index, as collections are built before any page renders.
+  const slugify = eleventyConfig.getFilter("slugify");
+  let topicIndex = topics.buildIndex([], slugify);
+
+  eleventyConfig.addCollection("topics", function(collectionApi) {
+    const posts = collectionApi.getFilteredByGlob(["src/fragments/*.md", "src/marginalia/*.md"]);
+    topicIndex = topics.buildIndex(posts, slugify);
+    return topicIndex.linkable;
+  });
+
+  eleventyConfig.addFilter("topicRedirects", (topicList) => {
+    return Object.fromEntries(topicList.flatMap((topic) => topic.aliases.map((alias) => [alias, topic.slug])));
+  });
+
   eleventyConfig.addFilter("htmlDate", (dateObj) => {
     return new Date(dateObj).toISOString().split("T")[0];
   });
@@ -95,30 +53,15 @@ module.exports = function(eleventyConfig) {
   });
 
   eleventyConfig.addTransform("wikilinks", function(content, outputPath) {
-    if (!outputPath || !outputPath.endsWith('.html')) {
+    if (!outputPath || !outputPath.endsWith(".html")) {
       return content;
     }
-
-    let transformed = content.replace(/\[\[([^\]]+?)\]\]/g, (match, term) => {
-      const label = term.trim();
-      const href = "/backlinks.html?term=" + encodeURIComponent(label);
-      return `<a href="${href}" class="backlink-inline">${label}</a>`;
-    });
-
-    transformed = transformed.replace(/<a([^>]*href="\/backlinks\.html\?term=[^"]*"[^>]*)>([^<]+)<\/a>/g, (match, attrs, label) => {
-      if (/class="[^"]*backlink-inline[^"]*"/.test(attrs)) {
-        return match;
-      }
-
-      if (/class="[^"]*"/.test(attrs)) {
-        return match.replace(/class="([^"]*)"/, (full, classes) => `class="${classes} backlink-inline"`);
-      }
-
-      return `<a${attrs} class="backlink-inline">${label}</a>`;
-    });
-
-    return transformed;
+    return topics.renderWikilinks(content, topicIndex, slugify);
   });
+
+  // Same as the transform, for feed content: Eleventy's own HTML transform (which makes feed links absolute)
+  // runs before config transforms, so src/rss.njk applies this filter first.
+  eleventyConfig.addFilter("wikilinks", (content) => topics.renderWikilinks(content, topicIndex, slugify));
 
   return {
     dir: {

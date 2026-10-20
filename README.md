@@ -2,7 +2,7 @@
 
 Eleventy-powered personal blog.
 
-For diagrams of how the build, deploy, backlinks, and client-side scripts fit together, see [ARCHITECTURE.md](ARCHITECTURE.md).
+For diagrams of how the build, deploy, topics, and client-side scripts fit together, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Setup
 
@@ -36,7 +36,8 @@ Deploying doesn't need a script: pushing to `main` builds and publishes the site
 - `src/fragments.njk` — fragments listing page
 - `src/fragments/*.md` — markdown mini-essays between 200 and 250 words
 - `src/404.njk` — Eleventy 404 page
-- `src/backlinks.njk`, `src/backlinks-index.json.11ty.js` — backlinks search page and its keyword index
+- `src/topics.njk`, `src/topic.njk`, `lib/topics.js` — topic list, one page per topic, and the logic behind them (see [Topics](#topics))
+- `src/backlinks.njk` — redirects old `/backlinks.html?term=…` links to topic pages
 - `src/rss.njk`, `src/sitemap.njk` — RSS feed and sitemap
 - `src/hidden/*.md` — unlisted pages, reachable only via direct link
 - `src/_data/site.json` — global site title, description, URL and preview image
@@ -125,6 +126,18 @@ pnpm run build
 pnpm run serve
 ```
 
+## Topics
+
+Wrap a word or name in double brackets in any fragment or marginalia post to mark it as a topic:
+
+```markdown
+Studies have shown that [[willpower]] is a limited resource.
+```
+
+- Once a topic appears in **at least two posts**, every `[[…]]` mention of it becomes a link to its page at `/topics/<topic>.html`, and it's listed on `/topics.html`.
+- Until then it renders as plain text. You can mark topics freely: they turn into links on their own once another post picks them up.
+- Capitalization doesn't matter: `[[Willpower]]` and `[[willpower]]` are the same topic.
+
 ## Notes
 
 - Output is generated into `_site/`, which is ignored by Git.
@@ -153,4 +166,4 @@ eleventyExcludeFromCollections: true
 
 ## Hidden pages
 
-Pages in `src/hidden/` are only reachable via a direct link. `src/hidden/hidden.json` gives every file in that folder the marginalia layout, keeps it out of listings, RSS, backlinks and the sitemap, and adds `<meta name="robots" content="noindex">` so search engines don't index it. Front matter only needs `title`, `description` and `permalink`.
+Pages in `src/hidden/` are only reachable via a direct link. `src/hidden/hidden.json` gives every file in that folder the marginalia layout, keeps it out of listings, RSS, topics and the sitemap, and adds `<meta name="robots" content="noindex">` so search engines don't index it. Front matter only needs `title`, `description` and `permalink`.

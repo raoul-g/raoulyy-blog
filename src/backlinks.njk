@@ -1,26 +1,24 @@
 ---
-layout: layouts/base.njk
-title: Backlinks
-description: Search backlinks for keywords across fragments and marginalia.
 permalink: "/backlinks.html"
+eleventyExcludeFromCollections: true
 ---
-
-<div class="backlinks-page">
-  <section class="backlinks-search">
-    <h1>Backlinks</h1>
-    <p>Search a keyword or click a backlink such as [[love]] to see where it appears across fragments and marginalia.</p>
-    <form id="backlinks-search-form" class="backlinks-form">
-      <label for="backlink-term">Keyword</label>
-      <input id="backlink-term" name="term" type="search" placeholder="love" autocomplete="off">
-      <button type="submit">Search</button>
-    </form>
-  </section>
-
-  <section id="backlink-results" class="backlink-results"></section>
-
-    <section class="backlinks-tags-section">
-    <h2>Popular keywords</h2>
-    <p>Browse the most referenced keywords and click one to load its backlinks.</p>
-    <div id="backlink-tags" class="backlink-tags"></div>
-  </section>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Moved to topics — {{ site.title }}</title>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="{{ site.url }}/topics.html">
+  <script>
+    // Backlinks became topics. Old links (/backlinks.html?term=Love), e.g. in feed readers,
+    // are sent to the matching topic page, or to the topic list if the term has no page.
+    var slugs = {{ collections.topics | topicRedirects | dump | safe }};
+    var term = (new URLSearchParams(location.search).get("term") || "").trim().toLowerCase();
+    location.replace(slugs[term] ? "/topics/" + slugs[term] + ".html" : "/topics.html");
+  </script>
+  <noscript><meta http-equiv="refresh" content="0; url=/topics.html"></noscript>
+</head>
+<body>
+  <p>This page has moved to <a href="/topics.html">topics</a>.</p>
+</body>
+</html>

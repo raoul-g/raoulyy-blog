@@ -19,7 +19,7 @@ eleventyExcludeFromCollections: true
       <pubDate>{{ post.date | dateToRfc822 }}</pubDate>
       <description>{{ post.data.description }}</description>
       <content:encoded><![CDATA[
-        {{ post.content | renderTransforms(post.data.page, site.url) | safe }}
+        {{ post.content | wikilinks | renderTransforms(post.data.page, site.url) | safe }}
       ]]></content:encoded>
     </item>
     {% endfor %}

@@ -1,0 +1,14 @@
+---
+layout: layouts/base.njk
+title: Topics
+description: Ideas, people and questions that connect fragments and marginalia.
+permalink: "/topics.html"
+---
+<h1>topics</h1>
+<p class="secondary">: ideas, people and questions that keep coming back across fragments and marginalia.</p>
+<br>
+<section aria-label="All topics" class="topic-tags">
+{%- for topic in collections.topics %}
+  <a href="/topics/{{ topic.slug }}.html" class="topic-tag">{{ topic.term }} <span>{{ topic.mentions | length }}</span></a>
+{%- endfor %}
+</section>
