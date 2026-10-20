@@ -3,7 +3,6 @@ title: An Absurd Passion for the Impossible in Times of Despair
 description: Towards the end of this year I finished reading 'To Have or To Be' by Erich Fromm.
 book: "To Have or To Be? | Erich Fromm"
 date: 2024-12-30
-excerpt: Fromm argues that our society must shift from a "having mode" of existence toward a "being mode" rooted in authentic connection, love, and human development.
 permalink: "/marginalia/an-absurd-passion-for-the-impossible-in-times-of-despair.html"
 ---
 

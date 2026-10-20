@@ -125,7 +125,7 @@ flowchart TB
     end
 
     subgraph Inputs["src/"]
-        CM["Content .md<br/>(front matter: layout, title,<br/>description, date, permalink,<br/>book, excerpt)"]
+        CM["Content .md<br/>(front matter: title, description,<br/>date, permalink, book)"]
         PG["Pages .njk"]
         BJ["backlinks-index.json.11ty.js"]
         SJ["_data/site.json"]
@@ -320,7 +320,6 @@ flowchart LR
 | `date` | ✓ | ✓ | sort order, numbering, `<time>`, RSS `pubDate` |
 | `permalink` | ✓ | ✓ | output URL (file names like `011-…` don't affect the URL) |
 | `book` | `"Title \| Author"` | – | marginalia listing subtitle |
-| `excerpt` | optional | – | currently not rendered anywhere |
 
 Fragment numbers (`#11`) aren't stored anywhere. They come from each fragment's position in the date-sorted collection, so adding one with an earlier date renumbers the ones after it.
 

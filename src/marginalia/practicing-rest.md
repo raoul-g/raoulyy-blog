@@ -3,7 +3,6 @@ title: Practicing Rest
 description: Reflecting on Walter Brueggemann's understanding of Sabbath as resistance to the culture of constant busyness.
 book: "Sabbath as Resistance: Saying No to the Culture of Now | Walter Brueggemann"
 date: 2025-07-17
-excerpt: Brueggemann invites us to practice Sabbath as a form of resistance, a radical rest that counters consumer society and affirms equality.
 permalink: "/marginalia/practicing-rest.html"
 ---
 

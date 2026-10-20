@@ -64,7 +64,6 @@ title: Your Post Title
 description: A short page description for SEO and social sharing.
 book: "Book Title | Author Name"
 date: 2026-04-10
-excerpt: A short summary of the book's argument (optional, not currently shown on the site).
 permalink: "/marginalia/your-post-slug.html"
 ---
 ```

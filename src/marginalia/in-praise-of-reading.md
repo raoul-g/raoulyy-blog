@@ -3,7 +3,6 @@ title: In Praise of Reading
 description: Reading is an end in itself, but Maryanne Wolf makes the case for why deep reading is vital for thinking and society.
 book: "Reader Come Home: The Reading Brain in a Digital World | Maryanne Wolf"
 date: 2025-12-23
-excerpt: Wolf explains how deep reading supports reflection, empathy, and democratic life in a society facing the rise of hyper attention.
 permalink: "/marginalia/in-praise-of-reading.html"
 ---
 

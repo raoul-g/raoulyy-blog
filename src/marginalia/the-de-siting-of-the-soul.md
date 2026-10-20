@@ -3,7 +3,6 @@ title: The De-Siting of the Soul
 description: Byung-Chul Han argues that our culture has lost narrative time and meaning as sites and traditions dissolve.
 book: "Hyperculture: Culture and Globalisation | Byung-Chul Han"
 date: 2026-03-29
-excerpt: Han describes hyperculture as a de-siting of meaning, where narratives collapse and the human search for identity becomes more urgent.
 permalink: "/marginalia/the-de-siting-of-the-soul.html"
 ---
 
