@@ -156,7 +156,7 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    BASE["<b>layouts/base.njk</b><br/>head: title, meta description, noindex (if set), canonical,<br/>Open Graph + Twitter card, RSS link, style.css, font preloads<br/>header: nav + theme toggle checkbox<br/>+ inline script restoring saved theme<br/><i>block content</i><br/>footer: year, RSS icon<br/>script: /js/main.js"]
+    BASE["<b>layouts/base.njk</b><br/>head: title, meta description, noindex (if set), canonical,<br/>Open Graph (og:type from ogType, default website) + Twitter card, RSS link, style.css, font preloads<br/>header: nav + theme toggle checkbox<br/>+ inline script restoring saved theme<br/><i>block content</i><br/>footer: year, RSS icon<br/>script: /js/main.js"]
     MARG["<b>layouts/marginalia.njk</b><br/>wraps content in div.review-body<br/>+ connected.njk"]
     FRAG["<b>layouts/fragment.njk</b><br/>finds own index in collections.fragments<br/>number = total − index<br/>connected.njk (Connected posts box)<br/>prev / next links with tooltip<br/>Share Fragment button"]
 
@@ -315,5 +315,3 @@ Fragment numbers (`#11`) aren't stored anywhere. They come from each fragment's 
 Found while analysing the project. None of them break the site, but they're good to know:
 
 - **Topic snippets come from raw Markdown** with tags and basic Markdown syntax stripped (`lib/topics.js`). Unusual syntax next to a `[[term]]` (e.g. footnotes) could still show up in the snippet text. It's escaped, so it's safe.
-- **`og:type`** is `article` only for URLs containing `marginalia`. Fragments get `website`.
-- **`src/404.njk`** nests its own `<main>` inside the layout's `<main>`.

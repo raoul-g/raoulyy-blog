@@ -17,13 +17,7 @@
   <link rel="preload" href="/css/fonts/fraunces-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="/images/rosette.png" type="image/png">
 
-  {% if "marginalia" in page.url %}
-    {% set ogType = "article" %}
-  {% else %}
-    {% set ogType = "website" %}
-  {% endif %}
-
-  <meta property="og:type" content="{{ ogType }}">
+  <meta property="og:type" content="{{ ogType or 'website' }}">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
   <meta property="og:site_name" content="{{ site.title }}">
   <meta property="og:title" content="{{ title }}{% if title != site.title %} — {{ site.title }}{% endif %}">

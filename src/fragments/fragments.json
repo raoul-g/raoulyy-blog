@@ -1,3 +1,4 @@
 {
-  "layout": "layouts/fragment.njk"
+  "layout": "layouts/fragment.njk",
+  "ogType": "article"
 }

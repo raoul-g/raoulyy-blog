@@ -1,3 +1,4 @@
 {
-  "layout": "layouts/marginalia.njk"
+  "layout": "layouts/marginalia.njk",
+  "ogType": "article"
 }
