@@ -57,7 +57,7 @@ flowchart TB
     ROOT["raoulyy-blog/"]
 
     ROOT --> WF[".github/workflows/deploy.yml<br/><i>build + publish to Pages</i>"]
-    ROOT --> CFG[".eleventy.js<br/><i>markdown-it, wikilink plugin,<br/>collections, filters, transform</i>"]
+    ROOT --> CFG[".eleventy.js<br/><i>markdown-it, wikilink plugin, RSS plugin,<br/>collections, filters, transform</i>"]
     ROOT --> PKG["package.json · pnpm-lock.yaml<br/>pnpm-workspace.yaml<br/><i>scripts, Eleventy dep,<br/>3-day minimumReleaseAge</i>"]
     ROOT --> SRC["src/ <i>(Eleventy input)</i>"]
     ROOT --> ASSETS["css/style.css · js/main.js · images/<br/><i>passthrough assets</i>"]
@@ -119,7 +119,8 @@ flowchart TB
         MDLIB["markdown-it<br/>html · linkify · typographer"]
         WLP["wikilinkPlugin<br/>core rule after 'inline':<br/>[[term]] → &lt;a class=backlink-inline&gt;"]
         COLL["Collections<br/>marginalia = src/marginalia/*.md<br/>fragments = src/fragments/*.md<br/>(both sorted newest first)"]
-        FILT["Filters<br/>htmlDate · readableDate · rfc822Date"]
+        FILT["Filters<br/>htmlDate · readableDate"]
+        RSSP["@11ty/eleventy-plugin-rss<br/>dateToRfc822 · getNewestCollectionItemDate<br/>+ HTML base plugin (renderTransforms)"]
         XFORM["Transform 'wikilinks' (*.html)<br/>catch leftover [[term]] in non-Markdown output<br/>+ ensure backlink-inline class"]
         PT["Passthrough copy<br/>css · js · images · CNAME<br/>robots.txt"]
         MDLIB --- WLP
@@ -153,6 +154,7 @@ flowchart TB
     LAYOUT --> XFORM
     XFORM --> O1 & O2 & O3 & O4 & O5
     PG --> O7 & O8
+    RSSP --> O7
     BJ --> O6
 ```
 
@@ -185,7 +187,7 @@ flowchart TB
 | `/fragments/*.html` | `fragment.njk` layout | `collections.fragments` for numbering + prev/next |
 | `/marginalia/*.html` | `marginalia.njk` layout | post content |
 | `/hidden/*.html` | `marginalia.njk` layout | excluded from collections, so not listed, not in RSS, backlinks, or sitemap |
-| `/rss.xml` | `rss.njk` | fragments + marginalia merged, sorted by date, full `templateContent` |
+| `/rss.xml` | `rss.njk` | fragments + marginalia merged, sorted by date, full content with links made absolute (`renderTransforms` with `site.url`) |
 | `/backlinks-index.json` | `backlinks-index.json.11ty.js` | collections + **raw `.md` files from disk** |
 | `/backlinks.html` | `backlinks.njk` | shell only; filled in by `main.js` |
 | `/sitemap.xml` | `sitemap.njk` | `collections.all`, so every page except those with `eleventyExcludeFromCollections` (404, hidden, rss, backlinks index) |
@@ -334,7 +336,6 @@ Found while analysing the project. None of them break the site, but they're good
 - **Two wikilink mechanisms:** the markdown-it plugin handles Markdown, and the HTML transform handles everything else (and re-checks link classes). The transform alone would be enough, but the plugin avoids regex-on-HTML for content.
 - **Backlink snippets come from raw Markdown**, so inline HTML or Markdown syntax next to a `[[term]]` can show up in the snippet text (it's escaped, so it's safe).
 - **Theme flash:** `main.js` runs at the end of `<body>`, so a returning visitor with the override set may briefly see the OS theme before the checkbox is restored.
-- **`rfc822Date`** formats with *local* hours but always appends `+0000`, so RSS timestamps are shifted by the build machine's UTC offset.
 - **`og:type`** is `article` only for URLs containing `marginalia`. Fragments get `website`.
 - **`src/404.njk`** nests its own `<main>` inside the layout's `<main>`.
 - **`archive-old-html/`** isn't used by the build anymore.

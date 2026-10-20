@@ -9,17 +9,17 @@ eleventyExcludeFromCollections: true
     <description>{{ site.description }}</description>
     <link>{{ site.url }}</link>
     <language>en-us</language>
-    <lastBuildDate>{{ "now" | rfc822Date }}</lastBuildDate>
     {% set allPosts = collections.fragments.concat(collections.marginalia) | sort(reverse=true, attribute="date") -%}
+    <lastBuildDate>{{ allPosts | getNewestCollectionItemDate | dateToRfc822 }}</lastBuildDate>
     {% for post in allPosts %}
     <item>
       <title>{{ post.data.title }}</title>
       <link>{{ site.url }}{{ post.url }}</link>
       <guid>{{ site.url }}{{ post.url }}</guid>
-      <pubDate>{{ post.date | rfc822Date }}</pubDate>
+      <pubDate>{{ post.date | dateToRfc822 }}</pubDate>
       <description>{{ post.data.description }}</description>
       <content:encoded><![CDATA[
-        {{ post.templateContent | safe }}
+        {{ post.content | renderTransforms(post.data.page, site.url) | safe }}
       ]]></content:encoded>
     </item>
     {% endfor %}
