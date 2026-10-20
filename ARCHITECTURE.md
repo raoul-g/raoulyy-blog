@@ -156,7 +156,7 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    BASE["<b>layouts/base.njk</b><br/>head: title, meta description, noindex (if set), canonical,<br/>Open Graph (og:type from ogType, default website) + Twitter card, RSS link, style.css, font preloads<br/>header: nav + theme toggle checkbox<br/>+ inline script restoring saved theme<br/><i>block content</i><br/>footer: year, RSS icon<br/>script: /js/main.js"]
+    BASE["<b>layouts/base.njk</b><br/>head: title, meta description, noindex (if set), canonical,<br/>Open Graph (og:type from ogType, default website) + Twitter card, RSS link, style.css, font preloads<br/>header: nav + theme toggle checkbox<br/>+ inline script restoring saved theme<br/><i>block content</i><br/>footer: year (build time), RSS icon<br/>script: /js/main.js"]
     MARG["<b>layouts/marginalia.njk</b><br/>from front matter: book line + h1,<br/>content, date ('thoughts collected by'),<br/>connected.njk, share button<br/>(header/footer only if book is set)"]
     FRAG["<b>layouts/fragment.njk</b><br/>finds own index in collections.fragments<br/>number = total − index<br/>connected.njk (Connected posts box)<br/>prev / next links with tooltip<br/>Share Fragment button"]
 
@@ -238,8 +238,7 @@ flowchart TD
     T1 -- no --> LOAD
     T2 --> LOAD
     LOAD(["End of body: main.js"]) --> T3["on change → save checked state<br/>to localStorage"]
-    T3 --> Y["set #current-year to current year"]
-    Y --> S{"#share-btn exists?<br/>(fragment pages)"}
+    T3 --> S{"#share-btn exists?<br/>(fragment pages)"}
     S -- yes --> S2["on click: navigator.share()<br/>fallback → clipboard.writeText(url)"]
     S -- no --> G
     S2 --> G["inject GoatCounter count.js<br/>(async, gc.zgo.at)"]

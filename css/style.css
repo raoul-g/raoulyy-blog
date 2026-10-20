@@ -148,6 +148,10 @@ nav ul {
     }
 }
 
+.theme-toggle {
+    display: flex;
+}
+
 #theme-toggle-checkbox {
     display: none;
 }

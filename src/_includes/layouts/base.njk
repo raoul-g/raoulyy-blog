@@ -9,7 +9,8 @@
   {%- if noindex %}
   <meta name="robots" content="noindex">
   {%- endif %}
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="/rss.xml">
   <link rel="stylesheet" href="/css/style.css">
@@ -50,14 +51,16 @@
             <line x1="16" y1="3" x2="14" y2="21"></line>
           </svg>
         </a></li>
-        <input type="checkbox" id="theme-toggle-checkbox" aria-label="Toggle Dark Mode">
-        <label for="theme-toggle-checkbox" class="theme-toggle-label" title="Toggle Theme"></label>
-        <script>
-          // Restore the saved theme right away (before the page is painted) to avoid a flash of the wrong theme
-          if (localStorage.getItem('theme-override') === 'true') {
-            document.getElementById('theme-toggle-checkbox').checked = true;
-          }
-        </script>
+        <li class="theme-toggle">
+          <input type="checkbox" id="theme-toggle-checkbox" aria-label="Toggle Dark Mode">
+          <label for="theme-toggle-checkbox" class="theme-toggle-label" title="Toggle Theme"></label>
+          <script>
+            // Restore the saved theme right away (before the page is painted) to avoid a flash of the wrong theme
+            if (localStorage.getItem('theme-override') === 'true') {
+              document.getElementById('theme-toggle-checkbox').checked = true;
+            }
+          </script>
+        </li>
       </ul>
     </nav>
   </header>
@@ -70,7 +73,7 @@
 
   <footer>
     <div class="footer-content">
-      <p>&copy; <span id="current-year">2025</span> raoulyy blog. All rights reserved.</p>
+      <p>&copy; {% year %} raoulyy blog. All rights reserved.</p>
       <a href="/rss.xml" title="RSS Feed" class="rss-link" aria-label="RSS Feed">
         <svg class="rss-icon" viewBox="-271 273 256 256" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true">
           <g>

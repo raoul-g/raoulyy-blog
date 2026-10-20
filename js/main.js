@@ -9,10 +9,7 @@ if (themeToggle) {
     });
 }
 
-// 3. Set copyright year automatically
-document.getElementById('current-year').textContent = new Date().getFullYear();
-
-// 4. Share Article Logic
+// 3. Share Article Logic
 const shareBtn = document.getElementById('share-btn');
 
 if (shareBtn) {
@@ -40,7 +37,7 @@ if (shareBtn) {
     });
 }
 
-// 5. GoatCounter Analytics
+// 4. GoatCounter Analytics
 const analyticsScript = document.createElement('script');
 analyticsScript.dataset.goatcounter = "https://raoulyy.goatcounter.com/count";
 analyticsScript.async = true;

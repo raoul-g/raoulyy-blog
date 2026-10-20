@@ -42,6 +42,9 @@ module.exports = function(eleventyConfig) {
     return Object.fromEntries(topicList.flatMap((topic) => topic.aliases.map((alias) => [alias, topic.slug])));
   });
 
+  // Current year for the footer, set at build time (each deploy)
+  eleventyConfig.addShortcode("year", () => String(new Date().getFullYear()));
+
   // "Book Title | Author" (marginalia front matter) → "'Book Title' | Author"
   eleventyConfig.addFilter("bookLine", (book) => {
     const [bookTitle, author] = book.split(" | ");
