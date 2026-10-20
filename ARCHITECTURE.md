@@ -196,6 +196,7 @@ Writing `[[willpower]]` in a fragment or marginalia post marks *willpower* as a 
 - **A topic gets a page once it connects at least two posts** (`MIN_POSTS` in `lib/topics.js`). Only then do its `[[…]]` mentions become links. Topics used in a single post render as plain text, but they stay indexed and turn into links automatically when a second post mentions them.
 - **Each topic page** (`/topics/<slug>.html`) lists every post that mentions the topic, newest first. Each card shows the sentence the term appears in, with the term highlighted.
 - **Each post ends with a "Connected posts" box** (`_includes/connected.njk`, included by both post layouts). For every topic in the post that has a page, it lists up to three *other* posts that mention it, plus "+N more" linking to the topic page. Posts without such topics show no box.
+- **Aliases:** `[[topic|text]]` shows *text* in the post (and in its snippet) but counts toward *topic*, e.g. `[[story|stories]]`.
 - **Spelling variants share one topic.** Topics are keyed by slug, so `[[Willpower]]` and `[[willpower]]` are the same topic. The lowercase spelling is shown unless every mention is capitalized (e.g. *God*, *Paul Tillich*).
 
 ```mermaid
