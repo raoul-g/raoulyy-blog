@@ -1,5 +1,4 @@
 ---
-layout: layouts/marginalia.njk
 title: The Man Who Lived So a God Might Die
 description: Reflections on Pär Lagerkvist's novel 'Barabbas' and its portrait of unbelief, longing, and modern separation.
 book: "Barabbas | Pär Lagerkvist"

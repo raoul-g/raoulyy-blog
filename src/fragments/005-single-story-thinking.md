@@ -1,5 +1,4 @@
 ---
-layout: layouts/fragment.njk
 title: Single-story Thinking
 description: The idea that everybody is religious basically says that each of us goes through life telling ourselves some kind of story...
 date: 2026-05-07

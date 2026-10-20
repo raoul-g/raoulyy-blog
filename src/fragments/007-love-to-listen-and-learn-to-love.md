@@ -1,5 +1,4 @@
 ---
-layout: layouts/fragment.njk
 title: Love to Listen and Learn to Love
 description: I've been exploring the concepts of stories and perspectives and the more I think about these things, the clearer the connection to love becomes...
 date: 2026-05-11

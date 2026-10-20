@@ -70,7 +70,7 @@ flowchart TB
     SRC --> JSONT["backlinks-index.json.11ty.js<br/><i>JS class template → JSON</i>"]
     SRC --> LAYOUTS["_includes/layouts/<br/>base · marginalia · fragment"]
     SRC --> DATA["_data/site.json<br/><i>global: title, description, url, image</i>"]
-    SRC --> CONTENT["fragments/NNN-*.md<br/>marginalia/*.md<br/>hidden/*.md"]
+    SRC --> CONTENT["fragments/NNN-*.md + fragments.json<br/>marginalia/*.md + marginalia.json<br/>hidden/*.md<br/><i>folder .json = defaults for every file inside</i>"]
 ```
 
 ---
@@ -314,7 +314,7 @@ flowchart LR
 
 | Field | Marginalia | Fragments | Used by |
 |---|:-:|:-:|---|
-| `layout` | `layouts/marginalia.njk` | `layouts/fragment.njk` | Eleventy |
+| `layout` | `layouts/marginalia.njk` (set by `marginalia.json`) | `layouts/fragment.njk` (set by `fragments.json`) | Eleventy |
 | `title` | ✓ | ✓ | `<title>`, OG/Twitter, listings, RSS, backlinks |
 | `description` | ✓ | ✓ | meta description, fragment card subtitle, RSS `<description>` |
 | `date` | ✓ | ✓ | sort order, numbering, `<time>`, RSS `pubDate` |

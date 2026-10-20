@@ -1,5 +1,4 @@
 ---
-layout: layouts/fragment.njk
 title: Wanting to Want
 description: I am often wondering how change is possible - in others, and especially in me....
 date: 2026-08-23

@@ -1,5 +1,4 @@
 ---
-layout: layouts/fragment.njk
 title: Tied to the Mast
 description: Studies have shown that willpower is a limited resource....
 date: 2026-08-27

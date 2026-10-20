@@ -1,5 +1,4 @@
 ---
-layout: layouts/marginalia.njk
 title: An Absurd Passion for the Impossible in Times of Despair
 description: Towards the end of this year I finished reading 'To Have or To Be' by Erich Fromm.
 book: "To Have or To Be? | Erich Fromm"

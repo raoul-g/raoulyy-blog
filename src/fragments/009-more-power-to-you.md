@@ -1,5 +1,4 @@
 ---
-layout: layouts/fragment.njk
 title: More Power to You
 description: In the past fragments I have explored specific definitions of love and wisdom that I considered to be very fruitful...
 date: 2026-06-25

@@ -56,7 +56,6 @@ The site styles are defined in `css/style.css`.
 
 ```yaml
 ---
-layout: layouts/base.njk
 title: Your Post Title
 description: A short page description for SEO and social sharing.
 book: "Book Title | Author Name"
@@ -65,6 +64,8 @@ excerpt: A short summary shown on the marginalia listing page.
 permalink: "/marginalia/your-post-slug.html"
 ---
 ```
+
+   No `layout` needed: every file in `src/marginalia/` gets `layouts/marginalia.njk` from `src/marginalia/marginalia.json`.
 
 3. Add your post content after the front matter.
 4. The listing page will be regenerated automatically when you build.
@@ -97,13 +98,14 @@ pnpm run serve
 
 ```yaml
 ---
-layout: layouts/fragment.njk
 title: Your Fragment Title
 description: A short page description for SEO and social sharing.
 date: 2026-04-10
 permalink: "/fragments/your-fragment-slug.html"
 ---
 ```
+
+   No `layout` needed: every file in `src/fragments/` gets `layouts/fragment.njk` from `src/fragments/fragments.json`.
 
 3. Write your fragment body below the front matter. Fragment pages are rendered as mini-essays in the `src/fragments/` collection.
 4. The fragment listing page uses `description` to render the card subtitle, so keep it concise.

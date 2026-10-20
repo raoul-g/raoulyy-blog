@@ -1,5 +1,4 @@
 ---
-layout: layouts/marginalia.njk
 title: Practicing Rest
 description: Reflecting on Walter Brueggemann's understanding of Sabbath as resistance to the culture of constant busyness.
 book: "Sabbath as Resistance: Saying No to the Culture of Now | Walter Brueggemann"

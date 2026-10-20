@@ -1,5 +1,4 @@
 ---
-layout: layouts/fragment.njk
 title: Imagine not forgiving yourself for not forgiving yourself
 description: Evil is the moment I lack the strength to be true to the good that compels me...
 date: 2026-04-10

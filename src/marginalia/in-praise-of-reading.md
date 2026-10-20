@@ -1,5 +1,4 @@
 ---
-layout: layouts/marginalia.njk
 title: In Praise of Reading
 description: Reading is an end in itself, but Maryanne Wolf makes the case for why deep reading is vital for thinking and society.
 book: "Reader Come Home: The Reading Brain in a Digital World | Maryanne Wolf"

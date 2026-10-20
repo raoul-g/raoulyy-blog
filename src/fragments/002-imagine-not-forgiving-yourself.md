@@ -1,5 +1,4 @@
 ---
-layout: layouts/fragment.njk
 title: Imagine not forgiving yourself
 description: Today, on Easter Sunday, I want to share a thought...
 date: 2026-04-05

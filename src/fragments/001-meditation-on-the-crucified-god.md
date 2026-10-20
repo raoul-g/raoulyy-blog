@@ -1,5 +1,4 @@
 ---
-layout: layouts/fragment.njk
 title: Meditation on the Crucified God
 description: If you are a believer observing Easter this weekend, I invite you to meditate on the crucified God today...
 date: 2026-04-03

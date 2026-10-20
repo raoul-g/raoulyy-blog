@@ -1,5 +1,4 @@
 ---
-layout: layouts/fragment.njk
 title: There is Truth But I Can't Have It
 description: Does acknowledging the limits of any one perspective mean that all perspectives are equally valid?
 date: 2026-05-31

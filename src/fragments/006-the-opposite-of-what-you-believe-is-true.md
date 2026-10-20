@@ -1,5 +1,4 @@
 ---
-layout: layouts/fragment.njk
 title: The Opposite of What You Believe Is True
 description: The antidote to single-story thinking is learning to hold multiple perspectives at once...
 date: 2026-05-08

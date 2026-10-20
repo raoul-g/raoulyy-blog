@@ -1,5 +1,4 @@
 ---
-layout: layouts/fragment.njk
 title: Everybody is Religious
 description: Many years ago, basically every person living was a practitioner of some kind of religion...
 date: 2026-04-25

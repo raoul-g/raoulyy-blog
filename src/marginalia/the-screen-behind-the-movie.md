@@ -1,5 +1,4 @@
 ---
-layout: layouts/marginalia.njk
 title: The Screen Behind the Movie
 description: Reflecting on Rupert Spira's teaching about awareness, nonduality, and the illusory nature of the separate self.
 book: "Being Aware of Being Aware | Rupert Spira"
