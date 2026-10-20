@@ -107,7 +107,6 @@ Local scripts:
 |---|---|
 | `pnpm run build` | `prebuild` (wipe `_site/`) → `eleventy`, same as CI |
 | `pnpm run serve` | Eleventy dev server with live reload on `localhost:8080` |
-| `pnpm run watch` | Rebuild on change without a server |
 
 ---
 

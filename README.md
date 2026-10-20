@@ -18,17 +18,15 @@ Install dependencies:
 pnpm install
 ```
 
-Build the site:
+## Scripts
 
-```bash
-pnpm run build
-```
+| Command | What it does | When to use it |
+|---|---|---|
+| `pnpm run serve` | Local preview at `http://localhost:8080` with live reload | While writing posts or changing templates/CSS |
+| `pnpm run build` | Builds the whole site once into `_site/` (same as the deploy) | To check the build before pushing or inspect the output (e.g. `_site/rss.xml`) |
+| `prebuild` | Deletes `_site/`; runs automatically before `build` | Never directly. If `serve` shows a page you've deleted, run `build` once and restart `serve`. |
 
-Run a local server with live reload:
-
-```bash
-pnpm run serve
-```
+Deploying doesn't need a script: pushing to `main` builds and publishes the site (see [Deploying](#deploying)).
 
 ## Project structure
 
