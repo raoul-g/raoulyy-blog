@@ -2,6 +2,8 @@
 
 Eleventy-powered personal blog.
 
+For diagrams of how the build, deploy, backlinks, and client-side scripts fit together, see [ARCHITECTURE.md](ARCHITECTURE.md).
+
 ## Setup
 
 This project uses pnpm (version pinned in `package.json`). Enable it once via corepack:
