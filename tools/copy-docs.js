@@ -42,7 +42,7 @@ function clearTarget(dir) {
 }
 
 if (!fs.existsSync(SOURCE_DIR)) {
-  console.error('Build directory not found. Run `npm run build` first.');
+  console.error('Build directory not found. Run `pnpm run build` first.');
   process.exit(1);
 }
 

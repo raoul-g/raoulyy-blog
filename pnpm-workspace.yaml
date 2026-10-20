@@ -1,0 +1,3 @@
+# Refuse package versions published less than 3 days ago (in minutes), so
+# compromised releases have time to be caught and pulled before we install them.
+minimumReleaseAge: 4320

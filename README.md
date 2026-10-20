@@ -4,28 +4,34 @@ Eleventy-powered personal blog.
 
 ## Setup
 
+This project uses pnpm (version pinned in `package.json`). Enable it once via corepack:
+
+```bash
+corepack enable pnpm
+```
+
 Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 Build the site:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 Build the site, regenerate the sitemap, and update `docs/` for GitHub Pages:
 
 ```bash
-npm run deploy
+pnpm run deploy
 ```
 
 Run a local server with live reload:
 
 ```bash
-npm run serve
+pnpm run serve
 ```
 
 ## Project structure
@@ -47,7 +53,7 @@ The site styles are defined in `css/style.css`.
 - Change the typography by updating the `@import` fonts and the `--font-sans` / `--font-title` variables.
 - Page layout, spacing, and content width are managed in the body and section rules, so adjust `body { max-width; padding; }` and the nav/content selectors to tweak the page layout.
 - Dark mode is handled by the theme toggle and media queries in `css/style.css`; editing the dark-mode variable values will change the alternate theme palette.
-- CSS changes do not require rebuilding Eleventy; simply refresh the browser while running `npm run serve` or rebuild if you want a fresh generated site.
+- CSS changes do not require rebuilding Eleventy; simply refresh the browser while running `pnpm run serve` or rebuild if you want a fresh generated site.
 
 ## Adding a new marginalia post
 
@@ -81,13 +87,13 @@ Your post text here...
 5. Build the site again:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 6. Preview locally:
 
 ```bash
-npm run serve
+pnpm run serve
 ```
 
 ## Adding a new fragment
@@ -111,13 +117,13 @@ permalink: "/fragments/your-fragment-slug.html"
 5. Build the site again:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 6. Preview locally:
 
 ```bash
-npm run serve
+pnpm run serve
 ```
 
 ## Notes
@@ -132,7 +138,7 @@ npm run serve
 1. Build the site, regenerate the sitemap, and update `docs/` in one command:
 
 ```bash
-npm run deploy
+pnpm run deploy
 ```
 
 2. Commit and push the generated `docs/` output:
@@ -162,17 +168,17 @@ The deploy command also regenerates the sitemap and copies it into `docs/`.
 Install dependencies:
 
 ```
-npm install
+pnpm install
 ```
 
 Build the site:
 
 ```
-npm run build
+pnpm run build
 ```
 
 Run a local server with live reload:
 
 ```
-npm run serve
+pnpm run serve
 ```
