@@ -48,7 +48,7 @@ The site styles are defined in `css/style.css`.
 
 - Global design tokens are set in `:root` at the top of the file.
 - Change colors by editing variables such as `--bg-color`, `--text-main`, `--text-muted`, `--accent`, `--border`, and `--text-highlight`.
-- Change the typography by updating the `@import` fonts and the `--font-sans` / `--font-title` variables.
+- Fonts are self-hosted in `css/fonts/` (iA Writer Quattro for body text, Fraunces for headings) and declared with `@font-face` at the top of `css/style.css`. To change typography, add the new `.woff2` files (plus their license) to `css/fonts/`, declare them there, and update the `--font-sans` / `--font-title` variables. If you add a font that's on every page, update the matching `<link rel="preload">` in `src/_includes/layouts/base.njk` too.
 - Page layout, spacing, and content width are managed in the body and section rules, so adjust `body { max-width; padding; }` and the nav/content selectors to tweak the page layout.
 - Dark mode is handled by the theme toggle and media queries in `css/style.css`; editing the dark-mode variable values will change the alternate theme palette.
 - CSS changes do not require rebuilding Eleventy; simply refresh the browser while running `pnpm run serve` or rebuild if you want a fresh generated site.

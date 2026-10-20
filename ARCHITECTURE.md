@@ -14,7 +14,7 @@ flowchart LR
         MD["src/fragments/*.md<br/>src/marginalia/*.md<br/>src/hidden/*.md"]
         NJK["src/*.njk pages<br/>src/_includes/layouts/*.njk"]
         DATA["src/_data/site.json"]
-        STATIC["css/ · js/ · images/<br/>CNAME · robots.txt"]
+        STATIC["css/ (+ self-hosted fonts) · js/ · images/<br/>CNAME · robots.txt"]
         SERVE["pnpm run serve<br/>localhost:8080"]
     end
 
@@ -34,7 +34,6 @@ flowchart LR
     end
 
     subgraph Ext["External services"]
-        FONTS["Google Fonts<br/>+ jsDelivr (iA Writer Quattro)"]
         GOAT["GoatCounter<br/>raoulyy.goatcounter.com"]
     end
 
@@ -43,7 +42,6 @@ flowchart LR
     GH -- "push to main" --> ELEVENTY --> SITE
     SITE -- "deploy-pages" --> PAGES
     PAGES --> HTML --> MAINJS
-    HTML -. "@import / @font-face" .-> FONTS
     MAINJS -. "injects count.js" .-> GOAT
     MAINJS -. "fetch /backlinks-index.json" .-> PAGES
 ```
@@ -60,7 +58,7 @@ flowchart TB
     ROOT --> CFG[".eleventy.js<br/><i>markdown-it, wikilink plugin, RSS plugin,<br/>collections, filters, transform</i>"]
     ROOT --> PKG["package.json · pnpm-lock.yaml<br/>pnpm-workspace.yaml<br/><i>scripts, Eleventy dep,<br/>3-day minimumReleaseAge</i>"]
     ROOT --> SRC["src/ <i>(Eleventy input)</i>"]
-    ROOT --> ASSETS["css/style.css · js/main.js · images/<br/><i>passthrough assets</i>"]
+    ROOT --> ASSETS["css/style.css · css/fonts/ · js/main.js · images/<br/><i>passthrough assets</i>"]
     ROOT --> TOOLS["tools/clean-site.js<br/><i>wipes _site/ before each build</i>"]
     ROOT --> OUT["_site/ <i>(build output, gitignored)</i>"]
     ROOT --> MISC["CNAME · robots.txt"]
@@ -160,7 +158,7 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    BASE["<b>layouts/base.njk</b><br/>head: title, meta description, noindex (if set), canonical,<br/>Open Graph + Twitter card, RSS link, style.css<br/>header: nav + theme toggle checkbox<br/>+ inline script restoring saved theme<br/><i>block content</i><br/>footer: year, RSS icon<br/>script: /js/main.js"]
+    BASE["<b>layouts/base.njk</b><br/>head: title, meta description, noindex (if set), canonical,<br/>Open Graph + Twitter card, RSS link, style.css, font preloads<br/>header: nav + theme toggle checkbox<br/>+ inline script restoring saved theme<br/><i>block content</i><br/>footer: year, RSS icon<br/>script: /js/main.js"]
     MARG["<b>layouts/marginalia.njk</b><br/>wraps content in div.review-body"]
     FRAG["<b>layouts/fragment.njk</b><br/>finds own index in collections.fragments<br/>number = total − index<br/>prev / next links with tooltip<br/>Share Fragment button"]
 
@@ -285,7 +283,7 @@ stateDiagram-v2
     end note
 ```
 
-Design tokens (`--bg-color`, `--text-main`, `--accent`, `--text-highlight`, …) are set in `:root` at the top of `css/style.css`. Fonts: iA Writer Quattro (body, via jsDelivr), Fraunces / Playfair Display (titles), Inter (fallback), all loaded from Google Fonts / jsDelivr.
+Design tokens (`--bg-color`, `--text-main`, `--accent`, `--text-highlight`, …) are set in `:root` at the top of `css/style.css`. Fonts are self-hosted in `css/fonts/`: iA Writer Quattro 400 for body text, and the variable Fraunces (normal + italic, Latin + Latin Extended, split by `unicode-range`) for `h1`–`h3`. Both are preloaded in `base.njk`. The only third-party request a visitor's browser makes is GoatCounter analytics.
 
 ---
 
