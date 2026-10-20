@@ -63,7 +63,6 @@ flowchart TB
     ROOT --> ASSETS["css/style.css · js/main.js · images/<br/><i>passthrough assets</i>"]
     ROOT --> TOOLS["tools/clean-site.js<br/><i>wipes _site/ before each build</i>"]
     ROOT --> OUT["_site/ <i>(build output, gitignored)</i>"]
-    ROOT --> ARCH["archive-old-html/<br/><i>pre-Eleventy hand-written HTML, unused</i>"]
     ROOT --> MISC["CNAME · robots.txt"]
 
     SRC --> PAGES_["index.njk · marginalia.njk · fragments.njk<br/>backlinks.njk · 404.njk<br/>rss.njk · sitemap.njk"]
@@ -321,7 +320,7 @@ flowchart LR
 | `date` | ✓ | ✓ | sort order, numbering, `<time>`, RSS `pubDate` |
 | `permalink` | ✓ | ✓ | output URL (file names like `011-…` don't affect the URL) |
 | `book` | `"Title \| Author"` | – | marginalia listing subtitle |
-| `excerpt` | ✓ | – | currently not rendered anywhere |
+| `excerpt` | optional | – | currently not rendered anywhere |
 
 Fragment numbers (`#11`) aren't stored anywhere. They come from each fragment's position in the date-sorted collection, so adding one with an earlier date renumbers the ones after it.
 
@@ -332,9 +331,7 @@ Fragment numbers (`#11`) aren't stored anywhere. They come from each fragment's 
 Found while analysing the project. None of them break the site, but they're good to know:
 
 - **Hidden pages aren't `noindex`.** They're kept out of the sitemap, but a search engine that finds a link to one can still index it. Add `<meta name="robots" content="noindex">` if they should stay truly unlisted.
-- **Dead passthrough entries:** `assets` and `404.html` don't exist at the root (the 404 page comes from `src/404.njk`).
 - **Two wikilink mechanisms:** the markdown-it plugin handles Markdown, and the HTML transform handles everything else (and re-checks link classes). The transform alone would be enough, but the plugin avoids regex-on-HTML for content.
 - **Backlink snippets come from raw Markdown**, so inline HTML or Markdown syntax next to a `[[term]]` can show up in the snippet text (it's escaped, so it's safe).
 - **`og:type`** is `article` only for URLs containing `marginalia`. Fragments get `website`.
 - **`src/404.njk`** nests its own `<main>` inside the layout's `<main>`.
-- **`archive-old-html/`** isn't used by the build anymore.

@@ -36,7 +36,11 @@ Deploying doesn't need a script: pushing to `main` builds and publishes the site
 - `src/fragments.njk` — fragments listing page
 - `src/fragments/*.md` — markdown mini-essays between 200 and 250 words
 - `src/404.njk` — Eleventy 404 page
-- `css/`, `js/`, `images/`, `assets/` — static assets copied through unchanged
+- `src/backlinks.njk`, `src/backlinks-index.json.11ty.js` — backlinks search page and its keyword index
+- `src/rss.njk`, `src/sitemap.njk` — RSS feed and sitemap
+- `src/hidden/*.md` — unlisted pages, reachable only via direct link
+- `src/_data/site.json` — global site title, description, URL and preview image
+- `css/`, `js/`, `images/` — static assets copied through unchanged
 
 ## Styling
 
@@ -60,7 +64,7 @@ title: Your Post Title
 description: A short page description for SEO and social sharing.
 book: "Book Title | Author Name"
 date: 2026-04-10
-excerpt: A short summary shown on the marginalia listing page.
+excerpt: A short summary of the book's argument (optional, not currently shown on the site).
 permalink: "/marginalia/your-post-slug.html"
 ---
 ```
@@ -124,7 +128,6 @@ pnpm run serve
 
 ## Notes
 
-- The old static HTML files have been moved out of the root so the site works as a clean Eleventy project.
 - Output is generated into `_site/`, which is ignored by Git.
 
 ## Deploying
@@ -147,24 +150,4 @@ The repository's Pages settings must have **Source: GitHub Actions** (Settings �
 
 ```yaml
 eleventyExcludeFromCollections: true
-```
-
-### Eleventy
-
-Install dependencies:
-
-```
-pnpm install
-```
-
-Build the site:
-
-```
-pnpm run build
-```
-
-Run a local server with live reload:
-
-```
-pnpm run serve
 ```
